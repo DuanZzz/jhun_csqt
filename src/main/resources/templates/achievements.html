@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<link rel="shortcut icon" href="/static/img/icons/facicon.png" />
+	<title>江汉大学社区搜索系统</title>
+	<link href="/static/css/app.css" rel="stylesheet">
+	<!--bootstrap.css（5.1.3）-->
+	<link href="/static/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+	<!--美化后的alert样式-->
+	<link href="/static/css/sweetalert.css" rel="stylesheet">
+	<style>
+		#myImg {
+			border-radius: 5px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		#myImg:hover {opacity: 0.7;}
+
+		/* The Modal (background) */
+		.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 100px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+		}
+
+		/* Modal Content (image) */
+		.modal-content {
+			margin: auto;
+			display: block;
+			width: 80%;
+			max-width: 700px;
+		}
+
+		/* Caption of Modal Image */
+		#caption {
+			margin: auto;
+			display: block;
+			width: 80%;
+			max-width: 700px;
+			text-align: center;
+			color: #ccc;
+			padding: 10px 0;
+			height: 150px;
+		}
+
+		/* Add Animation */
+		.modal-content, #caption {
+			-webkit-animation-name: zoom;
+			-webkit-animation-duration: 0.6s;
+			animation-name: zoom;
+			animation-duration: 0.6s;
+		}
+
+		@-webkit-keyframes zoom {
+			from {-webkit-transform: scale(0)}
+			to {-webkit-transform: scale(1)}
+		}
+
+		@keyframes zoom {
+			from {transform: scale(0.1)}
+			to {transform: scale(1)}
+		}
+
+		/* The Close Button */
+		.close {
+			position: absolute;
+			top: 15px;
+			right: 35px;
+			color: #f1f1f1;
+			font-size: 40px;
+			font-weight: bold;
+			transition: 0.3s;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #bbb;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		/* 100% Image Width on Smaller Screens */
+		@media only screen and (max-width: 700px){
+			.modal-content {
+				width: 100%;
+			}
+		}
+
+		.right1 {
+			position: absolute;
+			right: 0px;
+			width: 180px;
+		}
+
+		h9 {
+			 text-shadow: 2px 2px 2px	#A0A0A0;
+			 font-size:21px;
+		 }
+
+		#state {
+			display: flex;
+		}
+		.w-61 {
+			width: 61% !important;
+		}
+		.removeBtn2Style:focus,
+		.removeBtn2Style:active:focus,
+		.removeBtn2Style.active:focus,
+		.removeBtn2Style.focus,
+		.removeBtn2Style:active.focus,
+		.removeBtn2Style.active.focus {
+			outline: none;
+			box-shadow: none;
+		}
+		#loginState:hover {
+			background-color: #FFFFFF;
+			color: #6c757d;
+			border-color: rgb(13, 110, 253);
+		}
+		.center1 {
+			 padding: 70px 0;
+			 text-align: center;
+		 }
+		.contain{
+			position: relative;
+			margin: 0 auto;
+			height: 120px;
+			overflow: hidden;/*设置文案容器高度，超出部分隐藏*/
+		}
+		.open-btn{
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			height: 80px;
+			background: linear-gradient(180deg,rgba(255,255,255,0),#fff);/*实现渐变效果，遮罩效果*/
+		}
+		.open-btn a{
+			text-decoration: none;
+			display: inline-block;
+			margin-top: 60px;
+		}
+
+		.time1 {
+			width: 152.51px;
+			height: 18px;
+			font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+			font-size: 14px;
+		}
+	</style>
+</head>
+
+<body>
+<!-- The Modal（显示清晰图片的模态窗口） -->
+<div id="myModal" class="modal">
+	<!--模态窗关闭按钮-->
+	<span class="close">×</span>
+	<!--清晰图片-->
+	<img class="modal-content">
+	<!--文字注解-->
+	<div id="caption"></div>
+</div>
+
+<div class="wrapper" style="font-family:Times New Roman,Georgia,微软雅黑;">
+
+	<nav id="sidebar" class="sidebar active">
+		<div class="sidebar-content js-simplebar">
+			<a class="sidebar-brand" href="/getpage?value=index">
+                <span class="align-middle">
+                    <h9><strong>江汉大学社区搜索系统</strong></h9>
+                </span>
+			</a>
+			<h4>
+			<ul class="sidebar-nav">
+				<li class="sidebar-item active">
+					<a id="a1" data-target="#ui" data-toggle="collapse" class="sidebar-link">
+						<svg t="1626417373145" class="icon" viewBox="0 0 1254 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="15230" width="25" height="25">
+							<path d="M790.323624 478.979879a267.971104 267.971104 0 1 0-330.311846 0 444.103736 444.103736 0 0 0-281.561316 411.887965v88.754538a44.516656 44.516656 0 0 0 44.69089 44.37727h803.808771a44.516656 44.516656 0 0 0 44.69089-44.37727v-88.754538a443.493919 443.493919 0 0 0-281.317389-411.887965z m-358.920984-209.690002A193.921872 193.921872 0 1 1 625.307088 461.748187 193.294631 193.294631 0 0 1 431.40264 269.3073z m573.228173 681.723367H245.774282v-47.182429a379.463112 379.463112 0 0 1 758.908802 0z"
+								  p-id="15231" fill="#ffffff"></path>
+							<path d="M279.227112 520.081559l8.711674-2.038532a43.140212 43.140212 0 0 0 1.881722-82.813176 133.149231 133.149231 0 0 1-78.753537-121.092274c0-59.239386 51.398879-108.913353 105.14991-126.249585a260.3571 260.3571 0 0 1 41.816037-79.223967c3.118779-5.227005 6.568602-10.314622 10.001002-15.315124-3.58921-0.15681-6.96934-1.097671-10.785053-1.097671A222.827207 222.827207 0 0 0 133.968653 314.120153a220.475055 220.475055 0 0 0 58.124291 148.760552A353.031892 353.031892 0 0 0 0.000525 777.73804v68.752534a44.516656 44.516656 0 0 0 44.690889 44.37727h80.008018a343.414204 343.414204 0 0 1 9.060141-78.596726H77.185959v-34.376268a265.200791 265.200791 0 0 1 202.041153-257.813291z m778.823689-57.183431a220.492478 220.492478 0 0 0 58.124291-148.760551A222.827207 222.827207 0 0 0 892.825185 92.268654c-3.74602 0-7.195843 0.940861-10.785053 1.097671 3.48467 5.000501 6.882223 10.157812 10.001002 15.315123a263.42361 263.42361 0 0 1 41.711497 79.223967c53.751031 17.423349 112.659373 67.027623 112.659373 126.249585a133.253771 133.253771 0 0 1-78.596726 121.092274 44.446963 44.446963 0 0 0-30.316627 40.944869 44.95224 44.95224 0 0 0 32.024115 41.711497l8.711674 2.038532a265.200791 265.200791 0 0 1 202.110846 257.865562v34.376267h-64.065654a342.386226 342.386226 0 0 1 9.060142 78.596726h80.008017a44.516656 44.516656 0 0 0 44.69089-44.377269V777.807734a353.188703 353.188703 0 0 0-192.057574-314.909606z"
+								  p-id="15232" fill="#ffffff"></path>
+						</svg>
+						<span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>团队介绍</strong></span>
+					</a>
+					<ul id="ui" class="sidebar-dropdown list-unstyled" style="list-style: none;font-size: 17px">
+						<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=index">团队成员介绍</a></li>
+						<li class="sidebar-item active"><a class="sidebar-link" href="/getpage?value=achievements">团队已有成果</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=view">团队风采</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=connect">联系我们</a></li>
+					</ul>
+				</li>
+
+				<li class="sidebar-item">
+					<a id="a2" data-target="#forms" data-toggle="collapse" class="sidebar-link collapsed">
+						<svg t="1626417545730" class="icon" viewBox="0 0 1116 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="16451" width="24" height="24">
+							<path d="M1012.706166 803.352193H685.538866l115.97427 165.446106a33.857203 33.857203 0 0 1-52.564763 42.675996l-150.646454-208.005105H518.627794l-150.646454 208.005105a33.949201 33.949201 0 0 1-26.270382 12.425707 33.764205 33.764205 0 0 1-26.294381-55.101703L431.389847 803.352193H104.223547A103.851556 103.851556 0 0 1 0.325992 699.757631V265.876843a103.851556 103.851556 0 0 1 103.897555-103.572563h908.482619a103.827556 103.827556 0 0 1 103.897555 103.455565V699.757631a103.851556 103.851556 0 0 1-103.897555 103.594562z m36.300145-537.522349a36.184148 36.184148 0 0 0-36.160148-36.067152H104.223547a36.184148 36.184148 0 0 0-36.160149 36.067152v433.880788a36.184148 36.184148 0 0 0 36.160149 36.044152h908.482619a36.184148 36.184148 0 0 0 36.161149-36.044152h0.139996v-433.949787zM675.929092 602.700915a34.252194 34.252194 0 0 1-24.945413 15.241642 28.412331 28.412331 0 0 1-3.513917 0.139996 34.019199 34.019199 0 0 1-23.967436-9.843768L451.030385 436.603824l-95.404755 134.217842a33.880203 33.880203 0 0 1-55.288698-39.162079l118.674207-166.911071a33.9962 33.9962 0 0 1 51.634784-4.444896l171.23997 170.680983 118.790204-183.362684a33.9732 33.9732 0 0 1 46.887897-10.005765 33.55421 33.55421 0 0 1 10.005764 46.538905z m69.621361-535.195404h-374.31119a33.764205 33.764205 0 1 1 0-67.481412h374.31119a33.764205 33.764205 0 1 1 0 67.481412z"
+								  p-id="16452" fill="#ffffff"></path>
+						</svg>
+						<span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>社区搜索算法展示</strong></span>
+					</a>
+					<ul id="forms" class="sidebar-dropdown list-unstyled">
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="/getpage?value=overview">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+									 class="bi bi-info-circle" viewBox="0 0 16 16" style="margin-left: -7px">
+									<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+									<path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+								</svg>
+								<span style="margin-left: -8px;font-size: 17px;">
+										<strong>概述</strong>
+									</span>
+							</a>
+						</li>
+						<li>
+							<a id="a3" data-target="#infoNet" data-toggle="collapse" class="sidebar-link collapsed">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff"
+									 class="bi bi-globe2" viewBox="0 0 16 16" style="margin-left: -7px">
+									<path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+								</svg>
+								<span style="margin-left: -8px;font-size: 17px;">
+										<strong>同质信息网络</strong>
+									</span>
+							</a>
+							<ul id="infoNet" class="sidebar-dropdown list-unstyled">
+								<ul style="list-style: none;font-size: 16px">
+									<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-core">k-core</a></li>
+									<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-truss">k-truss</a></li>
+									<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-clique">k-clique</a></li>
+									<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=K-ECC">K-ECC</a></li>
+								</ul>
+							</ul>
+						</li>
+						<li>
+							<a id="a4" data-target="#bigraph" data-toggle="collapse" class="sidebar-link collapsed">
+								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#ffffff"
+									 class="bi bi-diagram-3" viewBox="0 0 16 16" style="margin-left: -9px">
+									<path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+								</svg>
+								<span style="margin-left: -8px;font-size: 17px;">
+										<strong>二部图</strong>
+									</span>
+							</a>
+							<ul id="bigraph" class="sidebar-dropdown list-unstyled">
+								<ul style="list-style: none;font-size: 16px;">
+									<li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=αβAWCS">(α，β)-AWCS</a></li>
+								</ul>
+							</ul>
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="/getpage?value=algContrast">
+								<!--算法分析的图标-->
+								<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white"
+									 class="bi bi-arrows-collapse" viewBox="0 0 16 16" style="margin-left: -10px">
+									<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"/>
+								</svg>
+								<span style="margin-left: -8px;font-size: 17px;">
+										<strong>算法对比</strong>
+									</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="sidebar-item"> <!--active-->
+					<a id="a5" data-target="#voice" data-toggle="collapse" class="sidebar-link collapsed">
+						<!--图标（svg，大小：24×24）-->
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-disc" viewBox="0 0 16 16">
+							<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+							<path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 5-5 .5.5 0 0 1 0 1zm4.5 3.5a.5.5 0 0 1 .5.5 5 5 0 0 1-5 5 .5.5 0 0 1 0-1 4 4 0 0 0 4-4 .5.5 0 0 1 .5-.5z"/>
+						</svg>
+						<span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>语音增强算法展示</strong></span>
+					</a>
+					<ul id="voice" class="sidebar-dropdown list-unstyled">
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="/getpage?value=adasastargan">
+								<!--图标-->
+
+								<span style="margin-left: -8px;font-size: 17px;">
+										<strong>AdaSAStarGAN</strong>
+									</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			</h4>
+		</div>
+	</nav>
+
+	<div class="main" >
+
+		<nav class="navbar navbar-expand navbar-light navbar-bg">
+			<a class="sidebar-toggle d-flex">
+				<i class="hamburger align-self-center" ></i>
+			</a>
+
+			<img src="/static/img/icons/图2.jpg" class="media-object" width="167px" height="54px">
+
+			<!--显示用户的登录状态-->
+			<div class="w-61" id="state">
+				<div class="dropdown" style="margin-left: auto;">
+					<button class="btn btn-outline-secondary removeBtn2Style" id="loginState">
+						登录
+					</button>
+					<ul id="user_menu" class="dropdown-menu" aria-labelledby="loginState">
+						<li><a class="dropdown-item" id="quitLogin">退出登录</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--显示用户的登录状态-->
+
+			<div class="right1">
+				<div class="center">
+					<img src="/static/img/icons/10.png" width="150px" height="52px">
+				</div>
+				<i class="icons icotime"></i>
+				<!--当前时间-->
+				<span class="time1" id="time1"></span>
+			</div>
+		</nav>
+
+		<main class="content">
+
+			<div class="row">
+
+				<div class="card bg-light text-dark">
+					<div class="card-body text" style=" text-align:center;">
+						<h1><strong>团 队 已 有 成 果</strong></h1>
+						<hr>
+					</div>
+					<div class="col-12 col-md-6 col-lg-12">
+				<blockquote>
+					<h2>
+						<strong>
+							<svg t="1641492105534" class="icon" viewBox="0 0 1024 1024" version="1.1"
+								 xmlns="http://www.w3.org/2000/svg" p-id="5595" width="36" height="36">
+								<path d="M342.703 822.128c20.509 21.097 53.787 21.097 74.347 0l264.285-272.039c20.498-21.134 20.498-55.402 0-76.493l-264.284-272.030c-20.555-21.134-53.835-21.134-74.347 0-20.545 21.104-20.545 55.364 0 76.503l227.125 233.776-227.124 233.748c-20.543 21.134-20.543 55.395 0 76.538v0z"
+									  p-id="5596"></path>
+							</svg>
+							期刊论文——李登实教授
+						</strong>
+					</h2>
+				</blockquote>
+
+					<h1 class="h3 mb-3" style="font-family:Times New Roman;">
+						<svg t="1641493402868" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="11935" width="32" height="32">
+							<path d="M872 886.6H152v-30c0-16.6 13.4-30 30-30h660c16.6 0 30 13.4 30 30v30zM657.9 143L209.5 591.4l-11.9 154.2c-0.9 11.7 8.9 21.5 20.6 20.6l154.3-11.8L820.9 306c7.5-7.5 7.5-19.7 0-27.2L685.1 143c-7.5-7.5-19.6-7.5-27.2 0z m-81.8 156.9l88 88-315.5 315.5-94.9 6.7 6.8-94.8 315.6-315.4z m95.4-95.4l88 88-57.9 57.9-88-88 57.9-57.9z"
+								  p-id="11936"></path>
+						</svg>
+						Optimization of sound fields reproduction based Higher-Order Ambisonics (HOA) using the
+						Generative Adversarial Network (GAN)
+					</h1>
+					<table class="table table-bordered" style="font-family:Times New Roman;">
+						<tbody>
+						<tr>
+							<td width="400" rowspan="3" align="center" valign="top">
+								<img id="myImg4" src="/static/images/3.jpg" style="cursor: pointer; "
+									 alt="Optimization of sound fields reproduction based Higher-Order Ambisonics (HOA) using the Generative Adversarial Network (GAN)"
+									 width="300" height="300" onclick="showImgInModal(this, 'myModal')">
+							</td>
+							<th><div class="center1">Abstract</div></th>
+							<td>
+								<div class="contain" id="textcontain">
+									<p style="text-indent:2em;">
+										Sound field reproduction using Higher-order Ambisonics (HOA) has many studies in
+										recent
+										years. However, in the HOA, sound fields are reproduced with the least square
+										solution
+										of spherical harmonics (SH) coefficients and not the global sound fields. In this
+										paper,
+										we try to reduce the reproduction error with a data-driven method. As we all known,
+										the
+										Generative Adversarial Networks (GAN) can be used to generate data similar to a data
+										set. With the GAN, the target sound fields are converted to sound fields that can be
+										reproduced accurately in the proposed approach. The data set of target sound fields
+										is
+										updated with the generated fields which have less reproduction error, and thus
+										reproduction errors are reduced. We simulated the performance with four
+										loudspeakers,
+										sound fields of 4 orders SH coefficients are reproduced with GAN and HOA at 1000 Hz,
+										with average reproduction errors of 0.3 and 0.6, respectively. Simulations show that
+										the
+										space between the least-square solution and the optimization solution is reduced
+										with
+										our method. Furthermore, the performances of HOA are optimized.
+									</p>
+									<div class="open-btn" id="btncontain">
+										<div class="text-right" style="color: #0099FF">
+										  <a onclick="showMore('textcontain', 'btncontain')">查看更多</a>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>Keywords</th>
+							<td style="text-align: left;">Spherical harmonics; Loudspeaker array; Sound field
+								reproduction; Generative adversarial network
+							</td>
+						</tr>
+						<tr>
+							<th>DOI</th>
+							<td style="text-align: left;">https://doi.org/10.1007/s11042-020-09735-3&nbsp;&nbsp;
+								<a href="https://link.springer.com/article/10.1007/s11042-020-09735-3">read</a>
+							</td>
+						</tr>
+
+						</tbody>
+					</table>
+					<br>
+					<h1 class="h3 mb-3" style="font-family:Times New Roman;">
+						<svg t="1641493402868" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="11935" width="32" height="32">
+							<path d="M872 886.6H152v-30c0-16.6 13.4-30 30-30h660c16.6 0 30 13.4 30 30v30zM657.9 143L209.5 591.4l-11.9 154.2c-0.9 11.7 8.9 21.5 20.6 20.6l154.3-11.8L820.9 306c7.5-7.5 7.5-19.7 0-27.2L685.1 143c-7.5-7.5-19.6-7.5-27.2 0z m-81.8 156.9l88 88-315.5 315.5-94.9 6.7 6.8-94.8 315.6-315.4z m95.4-95.4l88 88-57.9 57.9-88-88 57.9-57.9z"
+								  p-id="11936"></path>
+						</svg>
+						Fake Identity Attributes Detection Based on Analysis of Natural and
+							Human
+							Behaviors
+					</h1>
+					<table class="table table-bordered" style="font-family:Times New Roman;">
+						<tbody>
+						<tr>
+							<td width="400" rowspan="3" align="center" valign="top">
+								<img id="myImg5" src="/static/images/4.jpg" style="cursor: pointer; "
+									 alt="Fake Identity Attributes Detection Based on Analysis of Natural and Human Behaviors"
+									 width="300" height="500" onclick="showImgInModal(this, 'myModal')">
+							</td>
+							<th><div class="center1">Abstract</div></th>
+							<td>
+								<div class="contain" id="textcontain2">
+									<p style="text-indent:2em;">
+										Under confrontational environment, individual can impersonate others by wearing
+										masks or
+										other skills to conceal real identity, which brings enormous challenges to physical
+										identity recognition. Moreover, massive fake attributes seriously threaten identity
+										management. Aiming at the existence of fake attributes during multimodal
+										identification,
+										we propose a novel method to detect fake attributes and compute real identity for
+										security of systems. Most previous methods focused on the differences about features
+										between fake and normal attributes, but each method generally targeted one type of
+										fake
+										attribute, and the results decreased a lot with unknown attacks. In this paper, we
+										first
+										explore the essential differences of data distribution caused by natural and human
+										behaviors, then with order-of-consensus-calculation based on the differences, fake
+										attributes are detected by analyzing the rank of consensus identity in recognition
+										results, finally maximum-consensus-calculation is applied to compute real identity
+										for
+										evaluating detection performance. Experimental results on face, fingerprint, and
+										voiceprint demonstrate that the proposed method can detect fake attributes
+										effectively,
+										which has a higher accuracy, and the accuracy of identity recognition is increased
+										obviously by about 13.20% with forgery detection. The additional experiments further
+										confirm the feasibility of the proposed method with increase of fake attributes.
+										Furthermore, the proposed method can deal with different kinds of attacks, even with
+										unknown attacks, and it is also significant to improve the security of
+										identification
+										with complex environment.
+									</p>
+									<div class="open-btn" id="btncontain2">
+										<div class="text-right" style="color: #0099FF">
+											<a onclick="showMore('textcontain2', 'btncontain2')">查看更多</a>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th><div class="center1">Keywords</div></th>
+							<td style="text-align: left;">
+								IEEE Keywords: Fingerprint recognition, Face, Feature extraction, Security, Face
+								recognition , Forgery , Surgery
+								<br>INSPEC: Controlled Indexing, feature extraction, security of data, support vector
+								machines
+								<br>INSPEC: Non-Controlled Indexing, forgery detection, consensus identity, human
+								behaviors,
+								natural behaviors, physical identity recognition, fake identity attributes detection
+							</td>
+						</tr>
+						<tr>
+							<th>DOI</th>
+							<td style="text-align: left;">10.1109/ACCESS.2020.2987966&nbsp;&nbsp;<a href="https://ieeexplore.ieee.org/document/9066971">read</a></td>
+						</tr>
+
+
+						</tbody>
+					</table>
+					<br>
+					<h1 class="h3 mb-3" style="font-family:Times New Roman;">
+						<svg t="1641493402868" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="11935" width="32" height="32">
+							<path d="M872 886.6H152v-30c0-16.6 13.4-30 30-30h660c16.6 0 30 13.4 30 30v30zM657.9 143L209.5 591.4l-11.9 154.2c-0.9 11.7 8.9 21.5 20.6 20.6l154.3-11.8L820.9 306c7.5-7.5 7.5-19.7 0-27.2L685.1 143c-7.5-7.5-19.6-7.5-27.2 0z m-81.8 156.9l88 88-315.5 315.5-94.9 6.7 6.8-94.8 315.6-315.4z m95.4-95.4l88 88-57.9 57.9-88-88 57.9-57.9z"
+								  p-id="11936"></path>
+						</svg>
+						Perceptual Localization of Virtual Sound Source Based on Loudspeaker
+							Triplet
+					</h1>
+					<table class="table table-bordered" style="font-family:Times New Roman;">
+						<tbody>
+						<tr>
+							<td width="400" rowspan="3" align="center" valign="top">
+
+								<img id="myImg6" src="/static/images/5.jpg" style="cursor: pointer; "
+									 alt="Perceptual Localization of Virtual Sound Source Based on Loudspeaker Triplet"
+									 width="300" height="300" onclick="showImgInModal(this, 'myModal')">
+							</td>
+							<th><div class="center1">Abstract</div></th>
+							<td>
+								<div class="contain" id="textcontain3">
+								<p style="text-indent:2em;">
+									When using a loudspeaker triplet for virtual sound localization, the
+									traditional
+									conversion method will result in inaccurate localization. In this paper, we
+									constructed
+									a perceptual localization distortion model based on the basic principle of
+									binaural
+									perception sound source localization and relying on the known PKU HRTFs
+									database. On
+									this basic, the perceptual localization errors of virtual sources were
+									calculated by
+									using PKU HRTFs. After analyzing the perceptual localization errors of
+									virtual sources
+									reproduced by loudspeaker triplets, it was found that the main influence
+									factor, i.e.,
+									the convergence angle of the loudspeaker triplet, could constrain the
+									perceptual
+									localization distortion. Simulation and subjective evaluation experiments
+									indicate that
+									the proposed selection method outperforms the traditional method, and that
+									the proposed
+									method can be successfully applied to perceptual localization of the moving
+									virtual
+									source.
+								</p>
+								<div class="open-btn" id="btncontain3">
+									<div class="text-right" style="color: #0099FF">
+										<a onclick="showMore('textcontain3', 'btncontain3')">查看更多</a>
+									</div>
+								</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>Keywords</th>
+							<td style="text-align: left;">
+								Virtual sound source, Loudspeaker triplet, Head related transfer function,
+								Perceptual
+								localization
+							</td>
+						</tr>
+						<tr>
+							<th>DOI</th>
+							<td style="text-align: left;">https://doi.org/10.1007/978-3-030-37734-2_16&nbsp;&nbsp;<a
+									href="https://link.springer.com/chapter/10.1007%2F978-3-030-37734-2_16">read</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<h1 class="h3 mb-3">
+						<svg t="1641493402868" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="11935" width="32" height="32">
+							<path d="M872 886.6H152v-30c0-16.6 13.4-30 30-30h660c16.6 0 30 13.4 30 30v30zM657.9 143L209.5 591.4l-11.9 154.2c-0.9 11.7 8.9 21.5 20.6 20.6l154.3-11.8L820.9 306c7.5-7.5 7.5-19.7 0-27.2L685.1 143c-7.5-7.5-19.6-7.5-27.2 0z m-81.8 156.9l88 88-315.5 315.5-94.9 6.7 6.8-94.8 315.6-315.4z m95.4-95.4l88 88-57.9 57.9-88-88 57.9-57.9z"
+								  p-id="11936"></path>
+						</svg>
+						基于Gram矩阵和卷积神经网络的风格迁移算法
+					</h1>
+					<table class="table table-bordered" style="font-family:Times New Roman,Georgia,微软雅黑;">
+						<tbody>
+						<tr>
+							<td width="400" rowspan="3" align="center" valign="top">
+								<img id="myImg" src="/static/images/0.jpg"
+									 alt="基于Gram矩阵和卷积神经网络的风格迁移算法" style="cursor: pointer; "
+									 width="300" height="240" onclick="showImgInModal(this, 'myModal')">
+							</td>
+							<th><div class="center1">摘要</div></th>
+							<td>
+								<div class="contain" id="textcontain4">
+								<p style="text-indent:2em;">
+									如何获得更好的图像风格迁移效果一直是图像处理领域中经典问题之一。针对传统方法存在表现欠佳并具有较强局限性的问题，讨论了卷积神经网络（convolutional
+									neural
+									network,CNN）不同层提取图像特征的特点，提出了一种基于Gram矩阵和CNN的图像风格迁移算法，并设计了多种艺术风格的迁移实验，最后通过实验验证所提出的算法可比传统算法在更短的时间更好地实现艺术图像的风格迁移，说明该算法在图像特征提取及图像风格迁移任务上更具优势。
+								</p>
+									<div class="open-btn" id="btncontain4">
+										<div class="text-right" style="color: #0099FF">
+											<a onclick="showMore('textcontain4', 'btncontain4')">查看更多</a>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>关键词</th>
+							<td style="text-align: left;">图像风格迁移；卷积神经网络；Gram矩阵；扩张卷积；</td>
+						</tr>
+						<tr>
+							<th>出处</th>
+							<td style="text-align: left;">江汉大学学报：自然科学版——2020年第3期62-68，共7页&nbsp;&nbsp;<a
+									href="http://qikan.cqvip.com/Qikan/Article/Detail?id=7102042032&from=Qikan_Search_Index">read</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<h1 class="h3 mb-3">
+						<svg t="1641493402868" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="11935" width="32" height="32">
+							<path d="M872 886.6H152v-30c0-16.6 13.4-30 30-30h660c16.6 0 30 13.4 30 30v30zM657.9 143L209.5 591.4l-11.9 154.2c-0.9 11.7 8.9 21.5 20.6 20.6l154.3-11.8L820.9 306c7.5-7.5 7.5-19.7 0-27.2L685.1 143c-7.5-7.5-19.6-7.5-27.2 0z m-81.8 156.9l88 88-315.5 315.5-94.9 6.7 6.8-94.8 315.6-315.4z m95.4-95.4l88 88-57.9 57.9-88-88 57.9-57.9z"
+								  p-id="11936"></path>
+						</svg>
+						基于逐阶共识计算的虚假物理身份属性检测方法
+					</h1>
+					<table class="table table-bordered" style="font-family:Times New Roman,Georgia,微软雅黑;">
+						<tbody>
+						<tr>
+							<td width="400" rowspan="3" align="center" valign="top">
+
+								<img id="myImg2" src="/static/images/2.jpg"
+									 alt="基于逐阶共识计算的虚假物理身份属性检测方法" style="cursor: pointer; "
+									 width="300" height="240" onclick="showImgInModal(this, 'myModal')">
+							</td>
+							<th><div class="center1">摘要</div></th>
+							<td>
+								<div class="contain" id="textcontain5">
+								<p style="text-indent:2em;">
+									通过使用面具、变更指纹等技术，个人可以轻松冒充他人，这给物理身份识别带来巨大挑战。针对身份识别过程中属性伪造的问题，提出了一种基于逐阶共识计算的虚假物理身份属性检测方法。该方法首先进行身份识别；然后利用错误识别结果近邻关系的差异，逐阶分析得到共识身份；最后分析共识身份在识别结果中的排序，以检测虚假属性。在人脸、指纹和声纹数据库上的实验结果表明，与多数表决方法相比，本文方法能有效检测出虚假物理身份属性，并具有更高的准确率。
+								</p>
+									<div class="open-btn" id="btncontain5">
+										<div class="text-right" style="color: #0099FF">
+											<a onclick="showMore('textcontain5', 'btncontain5')">查看更多</a>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>关<br>键<br>词</th>
+							<td style="text-align: left;">可信计算；虚假检测；共识计算；近邻关系；身份识别；</td>
+						</tr>
+						<tr>
+							<th>出处</th>
+							<td style="text-align: left;">《武汉大学学报：理学版》——2020年第2期103-110，共8页&nbsp;&nbsp;<a
+									href="http://qikan.cqvip.com/Qikan/Article/Detail?id=7101769650&from=Qikan_Search_Index">read</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<h1 class="h3 mb-3">
+						<svg t="1641493402868" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							 xmlns="http://www.w3.org/2000/svg" p-id="11935" width="32" height="32">
+							<path d="M872 886.6H152v-30c0-16.6 13.4-30 30-30h660c16.6 0 30 13.4 30 30v30zM657.9 143L209.5 591.4l-11.9 154.2c-0.9 11.7 8.9 21.5 20.6 20.6l154.3-11.8L820.9 306c7.5-7.5 7.5-19.7 0-27.2L685.1 143c-7.5-7.5-19.6-7.5-27.2 0z m-81.8 156.9l88 88-315.5 315.5-94.9 6.7 6.8-94.8 315.6-315.4z m95.4-95.4l88 88-57.9 57.9-88-88 57.9-57.9z"
+								  p-id="11936"></path>
+						</svg>
+						三维音频技术综述
+					</h1>
+					<table class="table table-bordered" style="font-family:Times New Roman,Georgia,微软雅黑;">
+						<tbody>
+						<tr>
+							<td width="400" rowspan="3" align="center" valign="top">
+								<img id="myImg3" src="/static/images/1.jpg" alt="三维音频技术综" style="cursor: pointer; "
+									 width="300" height="280" onclick="showImgInModal(this, 'myModal')">
+							</td>
+							<th><div class="center1">摘要</div></th>
+							<td>
+								<div class="contain" id="textcontain6">
+								<p style="text-indent:2em;">
+									三维（Three-dimension,3D）多媒体技术，尤其是和3D视频相比有所差距的3D音频技术受到了广泛的关注。当前三维音频技术研究可分为基于物理声场重建的多声道音频技术和基于感知的声音场景重建的多声道音频技术两大类。物理声场重建技术的重要代表是基于球谐分解的声重放技术和波场合成技术（Wave
+									field synthesis,WFS），基于感知的声音场景重建技术主要包括幅度平移技术（Amplitude
+									panning,AP）和基于头相关传输函数的双耳重建技术（Head
+									related transfer
+									function,HRTF）。本文对上述4类三维音频技术及其对应的典型系统进行了介绍及对比分析，并对三维音频技术当前3大主要研究热点：空间听觉机制、三维音频压缩编码以及三维音频系统精简的现状与前沿技术进行了介绍。
+								</p>
+								<div class="open-btn" id="btncontain6">
+									<div class="text-right" style="color: #0099FF">
+										<a onclick="showMore('textcontain6', 'btncontain6')">查看更多</a>
+									</div>
+								</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>关<br>键<br>词</th>
+							<td style="text-align: left;">三维音频；波场合成；头相关传输函数；幅度平移；空间听觉；三维音频系统精简；</td>
+						</tr>
+						<tr>
+							<th>出处</th>
+							<td style="text-align: left;">《数据采集与处理》——2014年第5期661-676，共16页&nbsp;&nbsp;<a
+									href="http://qikan.cqvip.com/Qikan/Article/Detail?id=662729965&from=Qikan_Search_Index">read</a>
+							</td>
+						</tr>
+
+						</tbody>
+					</table>
+					</div>
+
+				</div>
+
+			</div>
+
+		</main>
+
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row text-muted">
+					<div style="text-align:center;">
+						<p class="mb-0" style="font-family:Times New Roman,Georgia,宋体; color: black; ">
+							<strong>
+								Copyright © 江汉大学李登实科研团队 &nbsp; &nbsp; &nbsp; 地址：武汉经济技术开发区三角湖路8号 &nbsp; &nbsp; &nbsp;
+								邮政编码：430056 &nbsp; &nbsp; &nbsp; 电话：027-84226927-8501 &nbsp; &nbsp; &nbsp;
+								鄂ICP备05003321号-1
+							</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+</div>
+
+<!--JQuery.js-->
+<script src="/static/js/jquery-3.6.0.js"></script>
+
+<!--项目基础框架-->
+<!--app.js-->
+<script src="/static/js/app.js"></script>
+<!--前端框架中的脚本-->
+<script src="/static/js/frontFrameScript.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/static/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<!--美化后的alert的js-->
+<script src="/static/js/sweetalert-dev.js"></script>
+<!--jQuery.cookie-->
+<script src="/static/js/jquery.cookie.js"></script>
+<!--crypto.js-->
+<script src="/static/js/crypto-js.min.js"></script>
+<!--自定义js-->
+<script src="/static/js/achievements/achievements.js"></script>
+
+<script>
+	// 点击显示更多按钮
+	function showMore(textId, btnId) {
+		$('#' + textId).height("auto"); // 取消文字容器高度限制
+		$('#' + btnId).hide(); // 隐藏查看更多按钮
+	}
+</script>
+
+</body>
+
+</html>

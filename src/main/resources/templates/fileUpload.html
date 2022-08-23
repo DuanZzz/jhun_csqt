@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>DataFileUpload</title>
+
+    <link rel="stylesheet" href="/static/bootstrap-5.1.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+    <link href="/static/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+    <link href="/static/bootstrap-fileinput/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <!--jQuery-->
+    <script src="/static/js/jquery-3.6.0.js"></script>
+    <!--resize image 插件-->
+    <script src="/static/bootstrap-fileinput/js/plugins/piexif.js"></script>
+    <!--初始化预览窗口缩略图排序插件-->
+    <script src="/static/bootstrap-fileinput/js/plugins/sortable.js"></script>
+
+    <style>
+        .help-block{
+            color: grey;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-4">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/static/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/static/bootstrap-fileinput/js/locales/zh.js" type="text/javascript"></script>
+    <script src="/static/bootstrap-fileinput/themes/fas/theme.js" type="text/javascript"></script>
+    <script src="/static/bootstrap-fileinput/themes/explorer-fas/theme.js" type="text/javascript"></script>
+
+    <h4 style="text-align: center; font-family: '等线 Light'; font-weight: bold">数据集文件上传</h4><hr>
+
+    <form enctype="multipart/form-data">
+        <label style="font-family: 仿宋">简体中文</label>
+        <div class="form-group">
+            <div class="file-loading">
+                <input id="file-zh" name="files" type="file" multiple data-preview-file-type="any">
+            </div>
+        </div>
+        <p class="help-block">支持txt格式的文件，单个文件不能超过100MB，最多同时上传3个文件~</p> <!--、csv、doc、docx、pdf-->
+    </form>
+</div>
+</body>
+
+<script>
+    $("#file-zh").fileinput({
+        theme: 'fas', // 设置主题
+        language: 'zh', // 设置语言
+        uploadUrl: "Files/uploadFile", // 设置上传的地址
+        allowedFileExtensions: ['txt'], // 允许上传的文件后缀 、jpg、png , 'csv', 'doc', 'docx', 'pdf'
+        allowedFileTypes: ["object"], // 允许上传的文件类型
+        showUpload: true, // 是否显示上传按钮
+        browseClass: "btn btn-primary", // 按钮样式
+        minImageWidth: 50, // 图片的最小宽度
+        minImageHeight: 50, // 图片的最小高度
+        // maxImageWidth: 500, // 图片的最大宽度
+        // maxImageHeight: 500, // 图片的最大高度
+        maxFileSize: 307200, // 单位为kb，如果为0表示不限制文件大小 （这里单个限制文件最大为300M）
+        minFileCount: 1, // 表示允许同时上传的最少的文件个数
+        maxFileCount: 3, // 表示允许同时上传的最多的文件个数
+        enctype: 'multipart/form-data',
+        validateInitialCount: true,
+        msgFilesTooMany: "选择上传的文件数量({n})，超过允许的最大数值({m})！"
+    })
+    // 导入文件上传完成之后的事件
+    $('#file-zh').on('fileuploaded', function(event, data, previewId, index) {
+        // var form = data.form, files = data.files, extra = data.extra,
+        //     response = data.response, reader = data.reader;
+        // console.log(response);       // 打印出返回的json
+        // console.log(response.paths); // 打印出路径
+    });
+</script>
+
+</html>

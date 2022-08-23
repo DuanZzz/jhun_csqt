@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jhun_csqt.mapper.UserMapper">
+    <!-- 根据用户查询条件查询用户列表 -->
+    <select id="listUser" resultType="com.example.jhun_csqt.entity.user.User">
+        select * from `user`
+        <where>
+            <if test="email != null and email.length > 0">
+                and `email` = #{email}
+            </if>
+            <if test="password != null and password.length > 0">
+                and `password` = #{password}
+            </if>
+            <if test="identityCode != null">
+                and `identityCode` = #{identityCode}
+            </if>
+        </where>
+    </select>
+</mapper>

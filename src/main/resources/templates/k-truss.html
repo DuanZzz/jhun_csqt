@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="shortcut icon" href="/static/img/icons/facicon.png" />
+    <title>江汉大学社区搜索系统</title>
+    <!--网站模板（app.css） css-->
+    <link href="/static/css/app.css" rel="stylesheet">
+    <!--bootstrap.css（5.1.3）-->
+    <link href="/static/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+    <!--美化后的alert样式-->
+    <link href="/static/css/sweetalert.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-slider.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<style>
+    /*------ original_style ------*/
+    .content {
+        padding: 1.5rem 1.5rem .75rem;
+        flex: 1;
+        max-width: 100vw;
+        direction: ltr;
+        background: linear-gradient(180deg,#101f58,#0b2878);
+    }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;!important;
+        background-clip: initial;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 24px;
+        box-shadow: none;!important;
+    }
+    .card-header {
+        background-color: #fff;!important;
+    }
+    .main2 {
+        display: flex;
+        position: relative;
+        /*justify-content: center;*/
+    }
+    /*------ original_style ------*/
+    .a1 {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+    .a1:hover {
+        color: blue;
+    }
+    .right1 {
+        position: absolute;
+        right: 0px;
+        width: 180px;
+    }
+    h9 {
+        text-shadow: 2px 2px 2px	#A0A0A0;
+        font-size:21px;
+    }
+
+    #R1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 1000px;
+        width: 100%;
+    }
+    #ktrussresultList{
+        text-align: center;
+    }
+    #ktrussresultList1{
+        text-align: center;
+    }
+    #echarts_graph{
+        width: 97%;
+        height: 1000px;
+    }
+    .clickme {
+        background-color: #eeeeee;
+        padding: 8px 20px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        color: #10a2ff;
+        cursor: pointer;
+    }
+    .download {
+        width: 60px;
+        height: 28px;
+        float: right;
+        border-radius: 3px;
+        padding: 1px 3px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .danger {
+        background-color: #FF0040;
+        color: #FFFFFF;
+    }
+    .danger:hover {
+        background-color: #EB003B;
+        color: #FFFFFF;
+    }
+    .success {
+        background-color: #00EB89;
+        color: #FFFFFF;
+    }
+    .success:hover {
+        background-color: #00D77E;
+        color: #FFFFFF;
+    }
+    .warning {
+        background-color: #FFA500;
+        color: #FFFFFF;
+    }
+    .warning:hover {
+        background-color: #EB9800;
+        color: #FFFFFF;
+    }
+    .info {
+        background-color: #00D4FF;
+        color: #FFFFFF;
+    }
+    .info:hover {
+        background-color: #00C4EB;
+        color: #FFFFFF;
+    }
+    .default {
+        background-color: #D1D6DC;
+        color: #000000;
+    }
+    .default:hover {
+        background-color: #DCE0E5;
+        color: #555555;
+    }
+    .row1 {
+        float: none;
+        min-height: 26px;
+        padding-top: 8px;
+        font-size: 14px;
+        color: #000;
+        clear: both;
+        text-align: justify;
+        text-justify: inter-word;
+        display: table;
+        width: 100%;
+    }
+    .rowtit {
+        display: table-cell;
+        vertical-align: top;
+        padding-right: 5px;
+        line-height: 26px;
+        font-weight: bold;
+        white-space: nowrap;
+        width: 8px;
+    }
+    .abstract-text {
+        display: inline;
+        color: #666;
+        line-height: 26px;
+        font-weight: normal;
+        text-align: justify;
+        text-justify: inter-word;
+        word-break: break-all;
+    }
+    .font1 {
+        padding-top: 25px;
+        padding-bottom: 15px;
+        font-size: 24px;
+        color: #333;
+        font-weight: normal;
+        line-height: 35px;
+        vertical-align: middle;
+        font-family: "Microsoft yahei",serif;
+    }
+
+    #ex1Slider .slider-selection {
+        background: #409eff;
+    }
+
+    /*------ refresh_icon_animation ------*/
+    @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    /*------ refresh_icon_animation ------*/
+
+    /*----------- 页面加载样式 -----------*/
+    /*指示器*/
+    .loading-indicator {
+        height: 80px;
+        width: 80px;
+        background: url('/static/img/gif/loading/Atom.gif') no-repeat center center;
+    }
+    /*遮盖层*/
+    .loading-indicator-overlay {
+        background-color: #FFFFFF;
+        opacity: 0.6;
+        filter: alpha(opacity = 60);
+    }
+    /*----------- 页面加载样式 -----------*/
+
+    .removeBtnDefStyle:focus,
+    .removeBtnDefStyle:active:focus,
+    .removeBtnDefStyle.active:focus,
+    .removeBtnDefStyle.focus,
+    .removeBtnDefStyle:active.focus,
+    .removeBtnDefStyle.active.focus {
+        border-color: #ced4da;
+        border-right-color: rgb(13, 110, 253);
+        outline: none;
+        box-shadow: none;
+    }
+
+    .removeBtn1Style:focus,
+    .removeBtn1Style:active:focus,
+    .removeBtn1Style.active:focus,
+    .removeBtn1Style.focus,
+    .removeBtn1Style:active.focus,
+    .removeBtn1Style.active.focus {
+        border-color: #ced4da;
+        background-color: #FFFFFF;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .removeBtn2Style:focus,
+    .removeBtn2Style:active:focus,
+    .removeBtn2Style.active:focus,
+    .removeBtn2Style.focus,
+    .removeBtn2Style:active.focus,
+    .removeBtn2Style.active.focus {
+        outline: none;
+        box-shadow: none;
+    }
+    #loginState:hover {
+        background-color: #FFFFFF;
+        color: #6c757d;
+        border-color: rgb(13, 110, 253);
+    }
+
+    .tickBtnStyle:focus,
+    .tickBtnStyle:active:focus,
+    .tickBtnStyle.active:focus,
+    .tickBtnStyle.focus,
+    .tickBtnStyle:active.focus,
+    .tickBtnStyle.active.focus {
+        border-color: rgb(13, 110, 253);
+        outline: none;
+        box-shadow: none;
+    }
+
+    #state {
+        display: flex;
+    }
+    .w-61 {
+        width: 61% !important;
+    }
+
+    /* div块的半透明样式 */
+    .halfTransparent {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    #collapse1 div table tr {
+        border: none;
+        text-align: center;
+    }
+    .explain {
+        text-decoration: none;
+    }
+
+    .time1 {
+        width: 152.51px;
+        height: 18px;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+        font-size: 14px;
+    }
+</style>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar active">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="/getpage?value=index">
+                <span class="align-middle">
+                    <h9><strong>江汉大学社区搜索系统</strong></h9>
+                </span>
+            </a>
+            <h4>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a id="a1" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+                            <svg t="1626417373145" class="icon" viewBox="0 0 1254 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="15230" width="25" height="25">
+                                <path d="M790.323624 478.979879a267.971104 267.971104 0 1 0-330.311846 0 444.103736 444.103736 0 0 0-281.561316 411.887965v88.754538a44.516656 44.516656 0 0 0 44.69089 44.37727h803.808771a44.516656 44.516656 0 0 0 44.69089-44.37727v-88.754538a443.493919 443.493919 0 0 0-281.317389-411.887965z m-358.920984-209.690002A193.921872 193.921872 0 1 1 625.307088 461.748187 193.294631 193.294631 0 0 1 431.40264 269.3073z m573.228173 681.723367H245.774282v-47.182429a379.463112 379.463112 0 0 1 758.908802 0z"
+                                      p-id="15231" fill="#ffffff"></path>
+                                <path d="M279.227112 520.081559l8.711674-2.038532a43.140212 43.140212 0 0 0 1.881722-82.813176 133.149231 133.149231 0 0 1-78.753537-121.092274c0-59.239386 51.398879-108.913353 105.14991-126.249585a260.3571 260.3571 0 0 1 41.816037-79.223967c3.118779-5.227005 6.568602-10.314622 10.001002-15.315124-3.58921-0.15681-6.96934-1.097671-10.785053-1.097671A222.827207 222.827207 0 0 0 133.968653 314.120153a220.475055 220.475055 0 0 0 58.124291 148.760552A353.031892 353.031892 0 0 0 0.000525 777.73804v68.752534a44.516656 44.516656 0 0 0 44.690889 44.37727h80.008018a343.414204 343.414204 0 0 1 9.060141-78.596726H77.185959v-34.376268a265.200791 265.200791 0 0 1 202.041153-257.813291z m778.823689-57.183431a220.492478 220.492478 0 0 0 58.124291-148.760551A222.827207 222.827207 0 0 0 892.825185 92.268654c-3.74602 0-7.195843 0.940861-10.785053 1.097671 3.48467 5.000501 6.882223 10.157812 10.001002 15.315123a263.42361 263.42361 0 0 1 41.711497 79.223967c53.751031 17.423349 112.659373 67.027623 112.659373 126.249585a133.253771 133.253771 0 0 1-78.596726 121.092274 44.446963 44.446963 0 0 0-30.316627 40.944869 44.95224 44.95224 0 0 0 32.024115 41.711497l8.711674 2.038532a265.200791 265.200791 0 0 1 202.110846 257.865562v34.376267h-64.065654a342.386226 342.386226 0 0 1 9.060142 78.596726h80.008017a44.516656 44.516656 0 0 0 44.69089-44.377269V777.807734a353.188703 353.188703 0 0 0-192.057574-314.909606z"
+                                      p-id="15232" fill="#ffffff"></path>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>团队介绍</strong></span>
+                        </a>
+                        <ul id="ui" class="sidebar-dropdown list-unstyled" style="font-size: 17px;">
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=index">团队成员介绍</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=achievements">团队已有成果</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=view">团队风采</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=connect">联系我们</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a id="a2" data-target="#forms" data-toggle="collapse" class="sidebar-link">
+                            <svg t="1626417545730" class="icon" viewBox="0 0 1116 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="16451" width="24" height="24">
+                                <path d="M1012.706166 803.352193H685.538866l115.97427 165.446106a33.857203 33.857203 0 0 1-52.564763 42.675996l-150.646454-208.005105H518.627794l-150.646454 208.005105a33.949201 33.949201 0 0 1-26.270382 12.425707 33.764205 33.764205 0 0 1-26.294381-55.101703L431.389847 803.352193H104.223547A103.851556 103.851556 0 0 1 0.325992 699.757631V265.876843a103.851556 103.851556 0 0 1 103.897555-103.572563h908.482619a103.827556 103.827556 0 0 1 103.897555 103.455565V699.757631a103.851556 103.851556 0 0 1-103.897555 103.594562z m36.300145-537.522349a36.184148 36.184148 0 0 0-36.160148-36.067152H104.223547a36.184148 36.184148 0 0 0-36.160149 36.067152v433.880788a36.184148 36.184148 0 0 0 36.160149 36.044152h908.482619a36.184148 36.184148 0 0 0 36.161149-36.044152h0.139996v-433.949787zM675.929092 602.700915a34.252194 34.252194 0 0 1-24.945413 15.241642 28.412331 28.412331 0 0 1-3.513917 0.139996 34.019199 34.019199 0 0 1-23.967436-9.843768L451.030385 436.603824l-95.404755 134.217842a33.880203 33.880203 0 0 1-55.288698-39.162079l118.674207-166.911071a33.9962 33.9962 0 0 1 51.634784-4.444896l171.23997 170.680983 118.790204-183.362684a33.9732 33.9732 0 0 1 46.887897-10.005765 33.55421 33.55421 0 0 1 10.005764 46.538905z m69.621361-535.195404h-374.31119a33.764205 33.764205 0 1 1 0-67.481412h374.31119a33.764205 33.764205 0 1 1 0 67.481412z"
+                                      p-id="16452" fill="#ffffff"></path>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>社区搜索算法展示</strong></span>
+                        </a>
+                        <ul id="forms" class="sidebar-dropdown list-unstyled">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=overview">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+                                         class="bi bi-info-circle" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>概述</strong>
+									</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="a3" data-target="#infoNet" data-toggle="collapse" class="sidebar-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff"
+                                         class="bi bi-globe2" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>同质信息网络</strong>
+									</span>
+                                </a>
+                                <ul id="infoNet" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-core">k-core</a></li>
+                                        <li class="sidebar-item active"><a class="sidebar-link" href="/getpage?value=k-truss">k-truss</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-clique">k-clique</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=K-ECC">K-ECC</a></li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                <a id="a4" data-target="#bigraph" data-toggle="collapse" class="sidebar-link collapsed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#ffffff"
+                                         class="bi bi-diagram-3" viewBox="0 0 16 16" style="margin-left: -9px">
+                                        <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>二部图</strong>
+									</span>
+                                </a>
+                                <ul id="bigraph" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px;">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=αβAWCS">(α，β)-AWCS</a></li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=algContrast">
+                                    <!--算法分析的图标-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white"
+                                         class="bi bi-arrows-collapse" viewBox="0 0 16 16" style="margin-left: -10px">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>算法对比</strong>
+									</span>
+                                </a>
+                                <!--<a id="a5" data-target="#algComparison" data-toggle="collapse" class="sidebar-link collapsed">
+                                    &lt;!&ndash;算法分析的图标&ndash;&gt;
+
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>算法对比</strong>
+									</span>
+                                </a>-->
+                                <!--<ul id="algComparison" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none; font-size: 16px;">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=αβAWCS">(α，β)-AWCS</a></li>
+                                    </ul>
+                                </ul>-->
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item"> <!--active-->
+                        <a id="a5" data-target="#voice" data-toggle="collapse" class="sidebar-link collapsed">
+                            <!--图标（svg，大小：24×24）-->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-disc" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 5-5 .5.5 0 0 1 0 1zm4.5 3.5a.5.5 0 0 1 .5.5 5 5 0 0 1-5 5 .5.5 0 0 1 0-1 4 4 0 0 0 4-4 .5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>语音增强算法展示</strong></span>
+                        </a>
+                        <ul id="voice" class="sidebar-dropdown list-unstyled">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=adasastargan">
+                                    <!--图标-->
+
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>AdaSAStarGAN</strong>
+									</span>
+                                </a>
+                            </li>
+                            <!--<li>
+                                <a id="a6" data-target="#infoNet" data-toggle="collapse" class="sidebar-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff"
+                                         class="bi bi-globe2" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong></strong>
+									</span>
+                                </a>
+                                <ul id="infoNet" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-core">k-core</a></li>
+                                        <li class="sidebar-item active"><a class="sidebar-link" href="/getpage?value=k-truss">k-truss</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-clique">k-clique</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=K-ECC">K-ECC</a></li>
+                                    </ul>
+                                </ul>
+                            </li>-->
+                        </ul>
+                    </li>
+
+                </ul>
+            </h4>
+        </div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle d-flex">
+                <i class="hamburger align-self-center"></i>
+            </a>
+            <img src="/static/img/icons/图2.jpg" class="media-object" width="167px" height="50px">
+
+            <!--显示用户的登录状态-->
+            <div class="w-61" id="state">
+                <div class="dropdown" style="margin-left: auto;">
+                    <button class="btn btn-outline-secondary removeBtn2Style" id="loginState">
+                        登录
+                    </button>
+                    <ul id="user_menu" class="dropdown-menu" aria-labelledby="loginState">
+                        <li><a class="dropdown-item" id="quitLogin">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--显示用户的登录状态-->
+
+            <div class="right1">
+                <div class="center">
+                    <img src="/static/img/icons/10.png" width="150px" height="54px">
+                </div>
+                <i class="icons icotime"></i>
+                <!--当前时间-->
+                <span class="time1" id="time1"></span>
+            </div>
+        </nav>
+
+        <main id="main1" class="content">
+            <main class="content">
+
+                <div class="card">
+                    <div class="card-body">
+                        <!--k-truss算法描述区-->
+                        <center>
+                            <h1 class="font1">Truss-based Community Search: a Truss-equivalence Based Indexing Approach</h1>
+                        </center>
+                        <div class="row1">
+                            <span class="rowtit">
+                                出版年份：
+                            </span>
+                            <span class="abstract-text">
+                                2017
+                            </span>
+                        </div>
+                        <div class="row1">
+                            <span class="rowtit">
+                                会议/期刊等级：
+                            </span>
+                            <span class="abstract-text">
+                                CCF-A会
+                            </span>
+                        </div>
+                        <div class="row1">
+                            <span class="rowtit">
+                                摘要：
+                            </span>
+                            <span class="abstract-text">
+                            我们考虑定义在一个大图G上的社区搜索问题：给定G中的一个查询顶点Q，找出G的所有稠密连通子图作为输出，
+                            每个子图包含查询V。社区搜索作为已知社区发现问题的在线依赖于查询的变体，使得个性化社区发现成为可能，
+                            这种社区发现在现实世界的大规模图中得到了广泛的应用。本文研究了基于truss模型的社区搜索问题，
+                            旨在发现查询顶点Q所属的所有稠密的、有凝聚力的k-truss社区。我们引入了一种新的等价关系，k-truss equivalence，
+                            用来模拟k-truss群落中边的固有密度和内聚性。因此，G的所有边都可以划分成一系列k-truss等价类，
+                            这些等价类构成了一种节省空间、保留桁架的索引结构EquiTruss。从此以后，社区搜索可以直接在EquiTruss上解决，
+                            而不需要重复、耗时地访问原始图G，这被证明是理论上最优的。此外，当G随着边的插入和删除而进化时，
+                            EquiTruss可以以动态的方式高效地更新。在真实世界的大规模图形上的实验研究验证了EquiTruss的效率和有效性，
+                            与最先进的TCP-Index方法相比，EquiTruss在社区搜索方面至少获得了一个数量级的加速。
+                            <span style="display: inline-block; width: 30px;">
+                                <a id="broLink" class="a1" title="点击浏览全文">全文</a>
+                            </span>
+                            </span>
+                            <button type="button" id="downloadBtn" class="download btn-danger" title="点击下载pdf文件"
+                                    style="width: 63px;">
+                                <span style="font-size: 14px">下载pdf</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="coverLayer1">
+                    <div class="card" id="result1" style="display: none;">
+                        <div class="card-header">
+                            <h4>k-truss算法搜索结果如下：</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width:7%;">
+                                        <center>nodeId</center>
+                                    </th>
+                                    <th style="width:7%;">
+                                        <center>ktrussValue</center>
+                                    </th>
+                                    <th style="width:12%;">
+                                        <center>numberOfEdges</center>
+                                    </th>
+                                    <th style="width:58%;">
+                                        <center>vertexLink</center>
+                                    </th>
+                                    <th class="d-none d-md-table-cell" style="width:16%">
+                                        <center>communityGraph</center>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="ktrussresultList"></tbody>
+                            </table>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 7%;">
+                                        <center>vertices</center>
+                                    </th>
+                                    <th style="width: 7%;">
+                                        <center>edges</center>
+                                    </th>
+                                    <th style="width: 12%;">
+                                        <center>dmax</center>
+                                    </th>
+                                    <th style="width: 9%;">
+                                        <center>kmax</center>
+                                    </th>
+                                    <th style="width: 16%">
+                                        <center>graph read time</center>
+                                    </th>
+                                    <th style="width: 13%">
+                                        <center>support time</center>
+                                    </th>
+                                    <th style="width: 20%">
+                                        <center>k-truss computation time</center>
+                                    </th>
+                                    <th style="width: 16%">
+                                        <center>index creation time</center>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="ktrussresultList1"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid p-0">
+                        <div class="main2">
+                            <div class="col-md-3" style="position: absolute; width: 26% !important; z-index: 10; "> <!--style="margin-left: -15px"-->
+                                <!--<div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+                                            <a class="clickme btn-success" href="/getpage?value=fileUpload" title="点击此处上传文件">
+                                                上传数据集文件
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div class="accordion accordion-flush mb-4" id="accordionFlushExample">
+                                    <div class="accordion-item halfTransparent">
+                                        <h2 class="accordion-header" id="flush-headingOne">
+                                            <button class="accordion-button collapsed removeBtn1Style" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                    aria-expanded="false" aria-controls="flush-collapseOne"
+                                                    style="background-color: rgba(255, 255, 255, 0.5) !important;">
+                                                Introduction Area
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                                             data-bs-parent="#accordionFlushExample" style="background-color: #FFFFFF; ">
+                                            <div class="accordion-body">
+                                                Placeholder content for this accordion, which is intended to demonstrate the
+                                                <code>.accordion-flush</code>
+                                                class. This is the first item's accordion body.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion mb-4" id="accordionExample">
+                                    <div class="accordion-item halfTransparent">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button removeBtn1Style" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                                    style="background-color: rgba(255, 255, 255, 0.5) !important;">
+                                                Functional Area
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                             data-bs-parent="#accordionExample" style="background-color: #FFFFFF; ">
+                                            <div class="accordion-body" style="padding: 0 !important;">
+                                                <div class="card" style="margin-bottom: 0 !important;">
+                                                    <div class="card-body">
+                                                        <div class="mb-4">
+                                                            <div style="display: flex; align-items: center; justify-content: center;">
+                                                                <a class="clickme btn-success" id="uploadFile" title="点击此处上传文件">
+                                                                    上传数据集文件
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="fileList" class="form-label"><strong>选择数据集：</strong></label>
+                                                            <div class="input-group">
+                                                                <select class="form-select removeBtnDefStyle" id="fileList"
+                                                                        style="cursor: pointer; width: 213.8px; height: 38px;">
+                                                                </select>
+                                                                <button id="tick1" type="button" class="btn btn-outline-primary tickBtnStyle">
+                                                                    <span title="加载数据集文件" style="cursor: pointer;">
+                                                                        <!--refreshIcon1-->
+                                                                        <!--<svg id="refresh" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                                             fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                                                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                                                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                                                                        </svg>-->
+                                                                        <!--refreshIcon2 ！-->
+                                                                        <svg id="refresh" fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="20px" height="20px">
+                                                                            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+                                                                                  d="M6.294 21.706C8.306 24.313 11.452 26 15 26c5.589 0 10.193-4.171 10.896-9.568M23.706 8.294C21.694 5.687 18.548 4 15 4 9.411 4 4.807 8.171 4.104 13.568"/>
+                                                                            <path d="M26 11L20 10 25 5zM3 19L9 20 4 25z"/>
+                                                                        </svg>
+                                                                        <!--refreshIcon3 ！！-->
+                                                                        <!--<svg id="refresh" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                                            &lt;!&ndash; Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch &ndash;&gt;
+                                                                            <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <g id="Outlined" transform="translate(-818.000000, -3436.000000)">
+                                                                                    <g id="Navigation" transform="translate(100.000000, 3378.000000)">
+                                                                                        <g id="Outlined-/-Navigation-/-refresh" transform="translate(714.000000, 54.000000)">
+                                                                                            <g>
+                                                                                                <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                                                                                                <path d="M17.65,6.35 C16.2,4.9 14.21,4 12,4 C7.58,4 4.01,7.58 4.01,12 C4.01,16.42 7.58,20 12,20 C15.73,20 18.84,17.45 19.73,14 L17.65,14 C16.83,16.33 14.61,18 12,18 C8.69,18 6,15.31 6,12 C6,8.69 8.69,6 12,6 C13.66,6 15.14,6.69 16.22,7.78 L13,11 L20,11 L20,4 L17.65,6.35 Z"
+                                                                                                      id="🔹-Icon-Color" fill="#1D1D1D"></path>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </svg>-->
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>nodeId</strong></label>
+                                                            <input type="text" id="nodeId" name="nodeId" value="7" class="form-control" placeholder="顶点的ID">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>ktrussValue</strong></label>
+                                                            <input type="text" id="ktrussValue" name="ktrussValue" value="2" class="form-control"
+                                                                   placeholder="社区的k-truss值">
+                                                        </div>
+                                                        <div class="mb-4">
+                                                            <button id="search_btn1" class="btn btn-primary">Search</button>
+                                                        </div>
+                                                        <div>
+                                                            <label class="form-label"><strong>绘图周期</strong></label>
+                                                            <input id="drawRate" data-slider-id="ex1Slider" type="text"
+                                                                   data-slider-min="1" data-slider-max="30" data-slider-step="1"
+                                                                   data-slider-value="10"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label"><strong>绘图周期</strong></label>
+                                            <input id="drawRate" data-slider-id="ex1Slider" type="text"
+                                                   data-slider-min="1" data-slider-max="30" data-slider-step="1"
+                                                   data-slider-value="10"/>
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                                <div class="accordion" id="algPerformanceIndex">
+                                    <div class="accordion-item halfTransparent">
+                                        <h2 class="accordion-header" id="header1">
+                                            <button class="accordion-button removeBtn1Style" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1"
+                                                    style="background-color: rgba(255, 255, 255, 0.5) !important; ">
+                                                算法性能展示
+                                            </button>
+                                        </h2>
+                                        <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="header1"
+                                             data-bs-parent="#algPerformanceIndex" style="background-color: #FFFFFF !important; ">
+                                            <div class="accordion-body" style="padding: 0; ">
+                                                <table class="table table-hover" style="margin: 0; ">
+                                                    <tr>
+                                                        <th>指标</th>
+                                                        <th>译名</th>
+                                                        <th>数值</th>
+                                                        <th>说明</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>F1-score</td>
+                                                        <td>F1值</td>
+                                                        <td>0.7</td>
+                                                        <td>
+                                                            <a class="explain" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                                                               title="××××××" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+                                                                指标说明
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Precision</td>
+                                                        <td>精确率</td>
+                                                        <td>0.4</td>
+                                                        <td>
+                                                            <a class="explain" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                                                               title="××××××" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+                                                                指标说明
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recall</td>
+                                                        <td>召回率</td>
+                                                        <td>0.6</td>
+                                                        <td>
+                                                            <a class="explain" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                                                               title="××××××" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+                                                                指标说明
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jaccard</td>
+                                                        <td>相似系数</td>
+                                                        <td>0.8</td>
+                                                        <td>
+                                                            <a class="explain" tabindex="0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                                                               title="××××××" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+                                                                指标说明
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="echarts_graph" style="width: 100% !important; z-index: 9; "></div>
+                            <!--<div class="card" style="width:73%; margin-left: 23px"> &lt;!&ndash;margin-left: 23px&ndash;&gt;
+                                <div id="R1">
+                                    <div id="echarts_graph"></div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div style="text-align:center;">
+                        <p class="mb-0" style="font-family:Times New Roman,Georgia,宋体; color: black; ">
+                            <strong>
+                                Copyright © 江汉大学李登实科研团队 &nbsp; &nbsp; &nbsp; 地址：武汉经济技术开发区三角湖路8号 &nbsp; &nbsp; &nbsp;
+                                邮政编码：430056 &nbsp; &nbsp; &nbsp; 电话：027-84226927-8501 &nbsp; &nbsp; &nbsp;
+                                鄂ICP备05003321号-1
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+<!--jQuery-->
+<script src="/static/js/jquery-3.6.0.js"></script>
+<!--jQuery-show-loading-->
+<script src="/static/js/jquery.showLoading.js"></script>
+<!--echarts.js测试-->
+<script src="/static/js/echarts.js"></script>
+<!--app.js-->
+<script src="/static/js/app.js"></script>
+<!--美化后的alert的js-->
+<script src="/static/js/sweetalert-dev.js"></script>
+<!--Popovers插件（popper.min.js）-->
+<script src="/static/js/popper.min.js"></script>
+<!--bootstrap-5.1.3-dist-->
+<script src="/static/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+<!--bootstrap-slider.js-->
+<script src="/static/js/bootstrap-slider.js"></script>
+<!--jQuery.cookie-->
+<script src="/static/js/jquery.cookie.js"></script>
+<!--crypto.js-->
+<script src="/static/js/crypto-js.min.js"></script>
+<!--自定义的js-->
+<script src="/static/js/k-truss/k-truss_script1.js"></script>
+<!--前端框架中的脚本-->
+<script src="/static/js/frontFrameScript.js"></script>
+</body>
+
+</html>

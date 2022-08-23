@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jhun_csqt.mapper.AlgContrastMapper">
+    <!-- 根据查询条件查询搜索结果 -->
+    <select id="listAlgResult" resultType="com.example.jhun_csqt.entity.algContrast.AlgContrastResult">
+        select * from `algresultcontrast`
+        <where>
+            <if test="algName != null and algName.length > 0">
+                and `algName` = #{algName}
+            </if>
+            <if test="dataSet != null and dataSet.length > 0">
+                and `dataSet` = #{dataSet}
+            </if>
+        </where>
+    </select>
+
+    <!-- 保存搜索结果 -->
+    <insert id="insertAlgResult" parameterType="com.example.jhun_csqt.entity.algContrast.AlgContrastResult">
+        insert into `algresultcontrast` (`algName`, `dataSet`, `inputData`, `outputData`)
+        values (#{algName}, #{dataSet}, #{inputData}, #{outputData})
+    </insert>
+
+    <!-- 修改搜索结果 -->
+    <update id="updateAlgResult">
+        update `algresultcontrast`
+        <set>
+            <if test="outputData != null and outputData.length > 0">
+                `outputData` = #{outputData},
+            </if>
+        </set>
+        where `id` = #{id}
+    </update>
+</mapper>

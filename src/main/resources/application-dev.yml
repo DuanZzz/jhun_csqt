@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/csdata?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
+      encoding: utf-8
+      mode: html5
+      servlet:
+        content-type: text/html
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 300MB
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.example.jhun_csqt.entity
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

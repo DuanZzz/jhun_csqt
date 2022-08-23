@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jhun_csqt.mapper.AlgOverviewMapper">
+    <!-- 根据查询条件查询算法概述 -->
+    <select id="listOverview" resultType="com.example.jhun_csqt.entity.Overview.AlgOverview">
+        select * from `algoverview`
+        <where>
+            <if test="id != null and id > 0">
+                and `id` = #{id}
+            </if>
+            <if test="title != null and title.length > 0">
+                and `title` = #{title}
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据查询条件模糊搜索算法概述 -->
+    <select id="searchOverview" resultType="com.example.jhun_csqt.entity.Overview.AlgOverview">
+        select * from `algoverview`
+        <where>
+            <if test="title != null and title.length > 0">
+                and `title` like concat('%', #{title} , '%')
+            </if>
+        </where>
+    </select>
+
+    <!--保存算法概述-->
+    <insert id="insertOverview" parameterType="com.example.jhun_csqt.entity.Overview.AlgOverview">
+        insert into `algoverview` (`title`, `authorAndInstitution`, `publicDate`, `gradeAndName`, `wordDesc`, `images`, `pdfFiles`)
+        values (#{title}, #{authorAndInstitution}, #{publicDate}, #{gradeAndName}, #{wordDesc}, #{images}, #{pdfFiles})
+    </insert>
+
+    <!--修改算法概述-->
+    <update id="updateOverview">
+        update `algoverview`
+        <set>
+            <if test="authorAndInstitution != null and authorAndInstitution.length > 0">
+                `authorAndInstitution` = #{authorAndInstitution},
+            </if>
+            <if test="publicDate != null and publicDate.length > 0">
+                `publicDate` = #{publicDate},
+            </if>
+            <if test="gradeAndName != null and gradeAndName.length > 0">
+                `gradeAndName` = #{gradeAndName},
+            </if>
+            <if test="wordDesc != null and wordDesc.length > 0">
+                `wordDesc` = #{wordDesc},
+            </if>
+            <if test="images != null and images.length > 0">
+                `images` = #{images},
+            </if>
+            <if test="pdfFiles != null and pdfFiles.length > 0">
+                `pdfFiles` = #{pdfFiles},
+            </if>
+        </set>
+        where `title` = #{title}
+    </update>
+
+    <!--删除算法概述-->
+    <delete id="deleteOverview">
+        delete from `algoverview`
+        <where>
+            <if test="id != 0">
+                and `id` = #{id}
+            </if>
+            <if test="title != null and title.length > 0">
+                and `title` = #{title}
+            </if>
+        </where>
+        limit 1
+    </delete>
+</mapper>

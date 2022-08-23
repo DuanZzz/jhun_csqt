@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <!--LOGO-->
+    <link rel="shortcut icon" href="/static/img/icons/facicon.png"/>
+    <title>江汉大学社区搜索系统</title>
+    <!--网站模板（app.css） css-->
+    <link href="/static/css/app.css" rel="stylesheet">
+    <!--bootstrap.css（5.1.3）-->
+    <link href="/static/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+    <!--图片查看器样式-->
+    <link href="/static/css/photoviewer.css" rel="stylesheet">
+    <!--美化后的alert样式-->
+    <link href="/static/css/sweetalert.css" rel="stylesheet">
+    <!--bootstrap文件上传（fileInput）-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+    <link href="/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+    <link href="/bootstrap-fileinput/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+    <!--复选框和单选按钮样式-->
+    <link href="/static/css/checkbox_radio-css/checked.min.css" rel="stylesheet">
+</head>
+
+<style>
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: initial;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 24px;
+        box-shadow: none;!important;
+    }
+
+    .right1 {
+        position: absolute;
+        right: 0px;
+        width: 180px;
+    }
+    h9 {
+        text-shadow: 2px 2px 2px #A0A0A0;
+        font-size: 21px;
+    }
+
+    .allCenter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .tipInfoDiv {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .removeBtnDefStyle:focus,
+    .removeBtnDefStyle:active:focus,
+    .removeBtnDefStyle.active:focus,
+    .removeBtnDefStyle.focus,
+    .removeBtnDefStyle:active.focus,
+    .removeBtnDefStyle.active.focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .help-block {
+        color: grey;
+        font-size: 15px;
+    }
+
+    /*----------- 页面加载样式 -----------*/
+    /*指示器*/
+    .loading-indicator {
+        height: 80px;
+        width: 80px;
+        background: url('/static/img/gif/loading/Atom.gif') no-repeat center center;
+    }
+    /*遮盖层*/
+    .loading-indicator-overlay {
+        background-color: #FFFFFF;
+        opacity: 0.6;
+        filter: alpha(opacity = 60);
+    }
+    /*----------- 页面加载样式 -----------*/
+
+    /*-------------- 算法概述的样式 --------------*/
+    .row1 {
+        float: none;
+        min-height: 26px;
+        padding-top: 8px;
+        font-size: 14px;
+        color: #000;
+        clear: both;
+        text-align: justify;
+        text-justify: inter-word;
+        display: table;
+        width: 100%;
+    }
+    .rowtit {
+        display: table-cell;
+        vertical-align: top;
+        padding-right: 5px;
+        line-height: 26px;
+        font-weight: bold;
+        white-space: nowrap;
+        width: 8px;
+    }
+    .abstract-text {
+        display: inline;
+        color: #666;
+        line-height: 26px;
+        font-weight: normal;
+        text-align: justify;
+        text-justify: inter-word;
+        word-break: break-all;
+    }
+    .font1 {
+        padding-top: 25px;
+        padding-bottom: 15px;
+        font-size: 24px;
+        color: #333;
+        font-weight: normal;
+        line-height: 35px;
+        vertical-align: middle;
+        font-family: "Microsoft yahei",serif;
+    }
+    .a1 {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+    .a1:hover {
+        color: blue;
+    }
+    /*-------------- 算法概述的样式 --------------*/
+
+    .img {
+        padding: 0.75rem;
+        border: 6px solid #dee2e6;
+        border-radius: 0.25rem;
+    }
+
+    .tip {
+        display: inline;
+        color: gray;
+        line-height: 26px;
+        font-weight: normal;
+        text-align: justify;
+        text-justify: inter-word;
+        word-break: break-all;
+    }
+
+    .w-20 {
+        width: 20% !important;
+    }
+    .w-30 {
+        width: 30% !important;
+    }
+    .w-35 {
+        width: 35% !important;
+    }
+    .w-60 {
+        width: 60% !important;
+    }
+    .w-80 {
+        width: 80% !important;
+    }
+
+    #state {
+        display: flex;
+    }
+    .w-61 {
+        width: 61% !important;
+    }
+    .removeBtn2Style:focus,
+    .removeBtn2Style:active:focus,
+    .removeBtn2Style.active:focus,
+    .removeBtn2Style.focus,
+    .removeBtn2Style:active.focus,
+    .removeBtn2Style.active.focus {
+        outline: none;
+        box-shadow: none;
+    }
+    #loginState:hover {
+        background-color: #FFFFFF;
+        color: #6c757d;
+        border-color: rgb(13, 110, 253);
+    }
+
+    #Algorithms tr {
+        border: none;
+    }
+
+    /*-------------------- 页面数据加载动画 --------------------*/
+    span[class*="k-"] {
+        height: 16px; width: 16px;
+        background: #0b5ed7;
+        display: inline-block;
+        margin: 12px 2px;
+
+        border-radius: 100%;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+
+        -webkit-animation: loader1 4s infinite;
+        -webkit-animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+        -webkit-animation-fill-mode: both;
+        -moz-animation: loader1 4s infinite;
+        -moz-animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+        -moz-animation-fill-mode: both;
+        -ms-animation: loader1 4s infinite;
+        -ms-animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+        -ms-animation-fill-mode: both;
+        animation: loader1 4s infinite;
+        animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+        animation-fill-mode: both;
+    }
+    @-webkit-keyframes loader1 {
+        0% {-webkit-transform: translateX(-30px); opacity: 0;}
+        25% {opacity: 1;}
+        50% {-webkit-transform: translateX(30px); opacity: 0;}
+        100% {opacity: 0;}
+    }
+
+    @-moz-keyframes loader1 {
+        0% {-moz-transform: translateX(-30px); opacity: 0;}
+        25% {opacity: 1;}
+        50% {-moz-transform: translateX(30px); opacity: 0;}
+        100% {opacity: 0;}
+    }
+
+    @-ms-keyframes loader1 {
+        0% {-ms-transform: translateX(-30px); opacity: 0;}
+        25% {opacity: 1;}
+        50% {-ms-transform: translateX(30px); opacity: 0;}
+        100% {opacity: 0;}
+    }
+
+    .loadingAnimation .k-1 {-webkit-animation-delay: 1s;animation-delay: 1s;-ms-animation-delay: 1s;-moz-animation-delay: 1s;}
+    .loadingAnimation .k-2 {-webkit-animation-delay: 0.8s;animation-delay: 0.8s;-ms-animation-delay: 0.8s;-moz-animation-delay: 0.8s;}
+    .loadingAnimation .k-3 {-webkit-animation-delay: 0.6s;animation-delay: 0.6s;-ms-animation-delay: 0.6s;-moz-animation-delay: 0.6s;}
+    .loadingAnimation .k-4 {-webkit-animation-delay: 0.4s;animation-delay: 0.4s;-ms-animation-delay: 0.4s;-moz-animation-delay: 0.4s;}
+    .loadingAnimation .k-5 {-webkit-animation-delay: 0.2s;animation-delay: 0.2s;-ms-animation-delay: 0.2s;-moz-animation-delay: 0.2s;}
+    .loadingAnimation .k-6 {-webkit-animation-delay: 0s;animation-delay: 0s;-ms-animation-delay: 0s;-moz-animation-delay: 0s;}
+    /*-------------------- 页面数据加载动画 --------------------*/
+
+    input::-webkit-input-placeholder {
+        text-align: center;
+    }
+    input::-moz-placeholder {
+        text-align: center;
+    }
+    input:-moz-placeholder {
+        text-align: center;
+    }
+    input:-ms-input-placeholder {
+        text-align: center;
+    }
+    /*-------------------- 算法概述搜索框 --------------------*/
+    .searchInfo::-webkit-input-placeholder {
+        color: #dc3545;
+    }
+    .searchInfo::-moz-placeholder {
+        color: #dc3545;
+    }
+    .searchInfo:-moz-placeholder {
+        color: #dc3545;
+    }
+    .searchInfo:-ms-input-placeholder {
+        color: #dc3545;
+    }
+    /*-------------------- 算法概述搜索框 --------------------*/
+
+    .time1 {
+        width: 152.51px;
+        height: 18px;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+        font-size: 14px;
+    }
+</style>
+
+<body>
+<!-- Modal（新增算法概述模态框） -->
+<div class="modal fade" id="addAlgorithmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="modalDialog" class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">新增算法概述</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="dataForm">
+                    <div class="mb-3">
+                        <label for="title1" class="form-label"><strong>标题：</strong></label>
+                        <div class="tipInfoDiv">
+                            <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                     class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </button>
+                            <input type="text" class="form-control" id="title1" name="title1"
+                                   maxlength="200" placeholder="字数不能超过200字。" style="width: 85%;">
+                            <span id="tState"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="authorAndInstitution" class="form-label"><strong>作者与机构：</strong></label>
+                        <div class="tipInfoDiv">
+                            <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                     class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </button>
+                            <input type="text" class="form-control" id="authorAndInstitution" name="authorAndInstitution"
+                                   maxlength="200" placeholder="字数不能超过200字。" style="width: 85%;">
+                            <span id="aState"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="publicTime" class="form-label"><strong>出版时间：</strong></label>
+                        <div class="tipInfoDiv">
+                            <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                     class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </button>
+                            <input type="date" class="form-control" id="publicTime" name="publicTime" style="width: 85%;">
+                            <span id="pState"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gradeAndName" class="form-label"><strong>级别/名称：</strong></label>
+                        <div class="tipInfoDiv">
+                            <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                     class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </button>
+                            <input type="text" class="form-control" id="gradeAndName" name="gradeAndName"
+                                   maxlength="150" placeholder="字数不能超过150字。" style="width: 85%;">
+                            <span id="gState"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="wordDesc" class="form-label"><strong>算法内容描述（文字）：</strong></label>
+                        <div class="tipInfoDiv">
+                            <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                     class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </button>
+                            <textarea class="form-control" id="wordDesc" name="wordsDesc"
+                                      style="width: 85%; height: 100px; overflow-y: scroll;"></textarea>
+                            <span id="wState"></span>
+                        </div>
+                    </div>
+                    <!--上传图片-->
+                    <div class="form-group mb-3">
+                        <label for="imgDesc" class="form-label"><strong>算法内容描述（图片）：</strong></label>
+                        <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                 class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </button>
+                        <input id="imgDesc" name="imgDesc" type="file" multiple data-preview-file-type="any">
+                    </div>
+                    <p class="help-block">（tip：支持png、jpg、jpeg、gif、svg文件，单张图片不能超过100MB，最多同时上传30张图片。）</p>
+                    <!--上传论文pdf文件-->
+                    <div class="form-group">
+                        <label for="pdfFile" class="form-label"><strong>上传论文pdf文件：</strong></label>
+                        <button type="button" class="btn removeBtnDefStyle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#1e90ff"
+                                 class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </button>
+                        <div class="file-loading">
+                            <input id="pdfFile" name="pdfFile" type="file" data-preview-file-type="any">
+                        </div>
+                    </div>
+                    <p class="help-block">（tip：支持doc、docx、pdf文件，文件不能超过100MB，一次只能上传1个文件。）</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="Cancel" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" id="Add" class="btn btn-primary">新增</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+
+    <nav id="sidebar" class="sidebar active">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="/getpage?value=index">
+                <span class="align-middle">
+                    <h9><strong>江汉大学社区搜索系统</strong></h9>
+                </span>
+            </a>
+            <h4>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a id="a1" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+                            <svg t="1626417373145" class="icon" viewBox="0 0 1254 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="15230" width="25" height="25">
+                                <path d="M790.323624 478.979879a267.971104 267.971104 0 1 0-330.311846 0 444.103736 444.103736 0 0 0-281.561316 411.887965v88.754538a44.516656 44.516656 0 0 0 44.69089 44.37727h803.808771a44.516656 44.516656 0 0 0 44.69089-44.37727v-88.754538a443.493919 443.493919 0 0 0-281.317389-411.887965z m-358.920984-209.690002A193.921872 193.921872 0 1 1 625.307088 461.748187 193.294631 193.294631 0 0 1 431.40264 269.3073z m573.228173 681.723367H245.774282v-47.182429a379.463112 379.463112 0 0 1 758.908802 0z"
+                                        p-id="15231" fill="#ffffff"></path>
+                                <path d="M279.227112 520.081559l8.711674-2.038532a43.140212 43.140212 0 0 0 1.881722-82.813176 133.149231 133.149231 0 0 1-78.753537-121.092274c0-59.239386 51.398879-108.913353 105.14991-126.249585a260.3571 260.3571 0 0 1 41.816037-79.223967c3.118779-5.227005 6.568602-10.314622 10.001002-15.315124-3.58921-0.15681-6.96934-1.097671-10.785053-1.097671A222.827207 222.827207 0 0 0 133.968653 314.120153a220.475055 220.475055 0 0 0 58.124291 148.760552A353.031892 353.031892 0 0 0 0.000525 777.73804v68.752534a44.516656 44.516656 0 0 0 44.690889 44.37727h80.008018a343.414204 343.414204 0 0 1 9.060141-78.596726H77.185959v-34.376268a265.200791 265.200791 0 0 1 202.041153-257.813291z m778.823689-57.183431a220.492478 220.492478 0 0 0 58.124291-148.760551A222.827207 222.827207 0 0 0 892.825185 92.268654c-3.74602 0-7.195843 0.940861-10.785053 1.097671 3.48467 5.000501 6.882223 10.157812 10.001002 15.315123a263.42361 263.42361 0 0 1 41.711497 79.223967c53.751031 17.423349 112.659373 67.027623 112.659373 126.249585a133.253771 133.253771 0 0 1-78.596726 121.092274 44.446963 44.446963 0 0 0-30.316627 40.944869 44.95224 44.95224 0 0 0 32.024115 41.711497l8.711674 2.038532a265.200791 265.200791 0 0 1 202.110846 257.865562v34.376267h-64.065654a342.386226 342.386226 0 0 1 9.060142 78.596726h80.008017a44.516656 44.516656 0 0 0 44.69089-44.377269V777.807734a353.188703 353.188703 0 0 0-192.057574-314.909606z"
+                                      p-id="15232" fill="#ffffff"></path>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>团队介绍</strong></span>
+                        </a>
+                        <ul id="ui" class="sidebar-dropdown list-unstyled" style="font-size: 17px;">
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=index">团队成员介绍</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=achievements">团队已有成果</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=view">团队风采</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=connect">联系我们</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a id="a2" data-target="#forms" data-toggle="collapse" class="sidebar-link">
+                            <svg t="1626417545730" class="icon" viewBox="0 0 1116 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="16451" width="24" height="24">
+                                <path d="M1012.706166 803.352193H685.538866l115.97427 165.446106a33.857203 33.857203 0 0 1-52.564763 42.675996l-150.646454-208.005105H518.627794l-150.646454 208.005105a33.949201 33.949201 0 0 1-26.270382 12.425707 33.764205 33.764205 0 0 1-26.294381-55.101703L431.389847 803.352193H104.223547A103.851556 103.851556 0 0 1 0.325992 699.757631V265.876843a103.851556 103.851556 0 0 1 103.897555-103.572563h908.482619a103.827556 103.827556 0 0 1 103.897555 103.455565V699.757631a103.851556 103.851556 0 0 1-103.897555 103.594562z m36.300145-537.522349a36.184148 36.184148 0 0 0-36.160148-36.067152H104.223547a36.184148 36.184148 0 0 0-36.160149 36.067152v433.880788a36.184148 36.184148 0 0 0 36.160149 36.044152h908.482619a36.184148 36.184148 0 0 0 36.161149-36.044152h0.139996v-433.949787zM675.929092 602.700915a34.252194 34.252194 0 0 1-24.945413 15.241642 28.412331 28.412331 0 0 1-3.513917 0.139996 34.019199 34.019199 0 0 1-23.967436-9.843768L451.030385 436.603824l-95.404755 134.217842a33.880203 33.880203 0 0 1-55.288698-39.162079l118.674207-166.911071a33.9962 33.9962 0 0 1 51.634784-4.444896l171.23997 170.680983 118.790204-183.362684a33.9732 33.9732 0 0 1 46.887897-10.005765 33.55421 33.55421 0 0 1 10.005764 46.538905z m69.621361-535.195404h-374.31119a33.764205 33.764205 0 1 1 0-67.481412h374.31119a33.764205 33.764205 0 1 1 0 67.481412z"
+                                      p-id="16452" fill="#ffffff"></path>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>社区搜索算法展示</strong></span>
+                        </a>
+                        <ul id="forms" class="sidebar-dropdown list-unstyled">
+                            <li class="sidebar-item active">
+                                <a class="sidebar-link" href="/getpage?value=overview">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+                                         class="bi bi-info-circle" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>概述</strong>
+									</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="a3" data-target="#infoNet" data-toggle="collapse" class="sidebar-link collapsed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff"
+                                         class="bi bi-globe2" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                                    </svg>
+									<span style="margin-left: -8px;font-size: 17px;">
+										<strong>同质信息网络</strong>
+									</span>
+                                </a>
+                                <ul id="infoNet" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-core">k-core</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-truss">k-truss</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-clique">k-clique</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=K-ECC">K-ECC</a></li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                <a id="a4" data-target="#bigraph" data-toggle="collapse" class="sidebar-link collapsed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#ffffff"
+                                         class="bi bi-diagram-3" viewBox="0 0 16 16" style="margin-left: -9px">
+                                        <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                    </svg>
+									<span style="margin-left: -8px;font-size: 17px;">
+										<strong>二部图</strong>
+									</span>
+                                </a>
+                                <ul id="bigraph" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px;">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=αβAWCS">(α，β)-AWCS</a></li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=algContrast">
+                                    <!--算法分析的图标-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white"
+                                         class="bi bi-arrows-collapse" viewBox="0 0 16 16" style="margin-left: -10px">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>算法对比</strong>
+									</span>
+                                </a>
+                                <!--<a id="a5" data-target="#algComparison" data-toggle="collapse" class="sidebar-link collapsed">
+                                    &lt;!&ndash;算法分析的图标&ndash;&gt;
+
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>算法对比</strong>
+									</span>
+                                </a>-->
+                                <!--<ul id="algComparison" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none; font-size: 16px;">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=αβAWCS">(α，β)-AWCS</a></li>
+                                    </ul>
+                                </ul>-->
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item"> <!--active-->
+                        <a id="a5" data-target="#voice" data-toggle="collapse" class="sidebar-link collapsed">
+                            <!--图标（svg，大小：24×24）-->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-disc" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 5-5 .5.5 0 0 1 0 1zm4.5 3.5a.5.5 0 0 1 .5.5 5 5 0 0 1-5 5 .5.5 0 0 1 0-1 4 4 0 0 0 4-4 .5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>语音增强算法展示</strong></span>
+                        </a>
+                        <ul id="voice" class="sidebar-dropdown list-unstyled">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=adasastargan">
+                                    <!--图标-->
+
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>AdaSAStarGAN</strong>
+									</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </h4>
+        </div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle d-flex">
+                <i class="hamburger align-self-center"></i>
+            </a>
+            <img src="/static/img/icons/图2.jpg" class="media-object" width="167px" height="50px">
+
+            <!--显示用户的登录状态-->
+            <div class="w-61" id="state">
+                <div class="dropdown" style="margin-left: auto;">
+                    <button class="btn btn-outline-secondary removeBtn2Style" type="button" id="loginState">
+                        登录
+                    </button>
+                    <ul class="dropdown-menu" id="user_menu" aria-labelledby="loginState">
+                        <li><a class="dropdown-item" id="quitLogin">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--显示用户的登录状态-->
+
+            <div class="right1">
+                <div class="center">
+                    <img src="/static/img/icons/10.png" width="150px" height="54px">
+                </div>
+                <i class="icons icotime"></i>
+                <!--当前时间-->
+                <span class="time1" id="time1"></span>
+            </div>
+        </nav>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+                <div class="card mb-5" style="height: 66px;">
+                    <!--这个div块中放全选复选框、查询、管理（修改,删除）算法概述的按钮（flex布局中右对齐：style="margin-left: auto; "）-->
+                    <div class="card-body w-100 allCenter" style="margin-left: auto; ">
+                        <!--全选（复选框）-->
+                        <div class="w-20 allCenter" id="allChecked" style="margin-right: auto; ">
+                            <input class="checked-hooray w-20" type="checkbox" id="totalChoose" name="totalChoose" onclick="allClicked(this)"
+                                   style="width: 26px; height: 26px;">
+                            <label for="totalChoose" class="w-80" style="font-size: 18px; font-family: 等线; font-weight: bold;">全选</label>
+                        </div>
+                        <!--搜索框-->
+                        <div class="w-30">
+                            <input class="form-control w-100" type="search" name="searchOverview" placeholder="输入标题后自动搜索。(模糊搜索)">
+                        </div>
+                        <!--管理按钮（修改和删除）-->
+                        <div class="w-50 allCenter" id="m_btns" style="margin-left: auto; ">
+                            <button class="btn btn-info w-20" id="manageAlg">
+                                <span style="font-size: 18px; font-family: 等线; font-weight: bold; ">管理</span>
+                            </button>
+                            <button class="btn btn-primary w-20" id="updateAlg" style="margin-left: 50px; ">
+                                <span style="font-size: 18px; font-family: 等线; font-weight: bold; ">修改</span>
+                            </button>
+                            <button class="btn btn-danger w-20" id="deleteAlg" style="margin-left: 50px; ">
+                                <span style="font-size: 18px; font-family: 等线; font-weight: bold; ">删除</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 算法概述主体（表格布局） -->
+                <div>
+                    <table class="table" id="Algorithms"></table>
+                </div>
+
+                <!-- 加载动画与加载后提示的区域 -->
+                <div style="height: 30px" class="mb-3">
+                    <div class='loadingAnimation allCenter'>
+                        <span class="k-1"></span>
+                        <span class="k-2"></span>
+                        <span class="k-3"></span>
+                        <span class="k-4"></span>
+                        <span class="k-5"></span>
+                        <span class="k-6"></span>
+                    </div>
+                    <div id="tip_info" class="allCenter">
+                        <span class="tip" style="margin-top: 10px;"></span>
+                    </div>
+                </div>
+
+                <!-- 算法概述添加按钮 -->
+                <div id="addBtn" class="allCenter" title='点击添加算法概述'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#a9a9a9' class='bi bi-plus-circle-dotted' viewBox='0 0 16 16'>" +
+                        <path d='M8 0c-.176 0-.35.006-.523.017l.064.998a7.117 7.117 0 0 1 .918 0l.064-.998A8.113 8.113 0 0 0 8 0zM6.44.152c-.346.069-.684.16-1.012.27l.321.948c.287-.098.582-.177.884-.237L6.44.153zm4.132.271a7.946 7.946 0 0 0-1.011-.27l-.194.98c.302.06.597.14.884.237l.321-.947zm1.873.925a8 8 0 0 0-.906-.524l-.443.896c.275.136.54.29.793.459l.556-.831zM4.46.824c-.314.155-.616.33-.905.524l.556.83a7.07 7.07 0 0 1 .793-.458L4.46.824zM2.725 1.985c-.262.23-.51.478-.74.74l.752.66c.202-.23.418-.446.648-.648l-.66-.752zm11.29.74a8.058 8.058 0 0 0-.74-.74l-.66.752c.23.202.447.418.648.648l.752-.66zm1.161 1.735a7.98 7.98 0 0 0-.524-.905l-.83.556c.169.253.322.518.458.793l.896-.443zM1.348 3.555c-.194.289-.37.591-.524.906l.896.443c.136-.275.29-.54.459-.793l-.831-.556zM.423 5.428a7.945 7.945 0 0 0-.27 1.011l.98.194c.06-.302.14-.597.237-.884l-.947-.321zM15.848 6.44a7.943 7.943 0 0 0-.27-1.012l-.948.321c.098.287.177.582.237.884l.98-.194zM.017 7.477a8.113 8.113 0 0 0 0 1.046l.998-.064a7.117 7.117 0 0 1 0-.918l-.998-.064zM16 8a8.1 8.1 0 0 0-.017-.523l-.998.064a7.11 7.11 0 0 1 0 .918l.998.064A8.1 8.1 0 0 0 16 8zM.152 9.56c.069.346.16.684.27 1.012l.948-.321a6.944 6.944 0 0 1-.237-.884l-.98.194zm15.425 1.012c.112-.328.202-.666.27-1.011l-.98-.194c-.06.302-.14.597-.237.884l.947.321zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a6.999 6.999 0 0 1-.458-.793l-.896.443zm13.828.905c.194-.289.37-.591.524-.906l-.896-.443c-.136.275-.29.54-.459.793l.831.556zm-12.667.83c.23.262.478.51.74.74l.66-.752a7.047 7.047 0 0 1-.648-.648l-.752.66zm11.29.74c.262-.23.51-.478.74-.74l-.752-.66c-.201.23-.418.447-.648.648l.66.752zm-1.735 1.161c.314-.155.616-.33.905-.524l-.556-.83a7.07 7.07 0 0 1-.793.458l.443.896zm-7.985-.524c.289.194.591.37.906.524l.443-.896a6.998 6.998 0 0 1-.793-.459l-.556.831zm1.873.925c.328.112.666.202 1.011.27l.194-.98a6.953 6.953 0 0 1-.884-.237l-.321.947zm4.132.271a7.944 7.944 0 0 0 1.012-.27l-.321-.948a6.954 6.954 0 0 1-.884.237l.194.98zm-2.083.135a8.1 8.1 0 0 0 1.046 0l-.064-.998a7.11 7.11 0 0 1-.918 0l-.064.998zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z' />
+                    </svg>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div style="text-align:center;">
+                        <p class="mb-0" style="font-family:Times New Roman,Georgia,宋体; color: black; ">
+                            <strong>
+                                Copyright © 江汉大学李登实科研团队 &nbsp; &nbsp; &nbsp; 地址：武汉经济技术开发区三角湖路8号 &nbsp; &nbsp; &nbsp;
+                                邮政编码：430056 &nbsp; &nbsp; &nbsp; 电话：027-84226927-8501 &nbsp; &nbsp; &nbsp;
+                                鄂ICP备05003321号-1
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!--jQuery-->
+<script src="/static/js/jquery-3.6.0.js"></script>
+<!--图片查看器js-->
+<script src="/static/js/photoviewer.js"></script>
+<!--jQuery-show-loading-->
+<script src="/static/js/jquery.showLoading.js"></script>
+<!--bootstrap-5.1.3-dist-->
+<script src="/static/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+<!--app.js-->
+<script src="/static/js/app.js"></script>
+<!--前端框架中的脚本-->
+<script src="/static/js/frontFrameScript.js"></script>
+<!--resize image 插件-->
+<script src="/static/bootstrap-fileinput/js/plugins/piexif.js"></script>
+<!--初始化预览窗口缩略图排序插件-->
+<script src="/static/bootstrap-fileinput/js/plugins/sortable.js"></script>
+
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
+
+<script src="/static/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="/static/bootstrap-fileinput/js/locales/zh.js" type="text/javascript"></script>
+<script src="/static/bootstrap-fileinput/themes/fas/theme.js" type="text/javascript"></script>
+<script src="/static/bootstrap-fileinput/themes/explorer-fas/theme.js" type="text/javascript"></script>
+<!--jQuery-show-loading-->
+<script src="/static/js/jquery.showLoading.js"></script>
+<!--美化后的alert的js-->
+<script src="/static/js/sweetalert-dev.js"></script>
+<!--jQuery.cookie-->
+<script src="/static/js/jquery.cookie.js"></script>
+<!--crypto.js-->
+<script src="/static/js/crypto-js.min.js"></script>
+<!-- 自定义的js -->
+<!-- 算法概述界面的js -->
+<script src="/static/js/overview/algorithms_script.js"></script>
+</body>
+
+</html>

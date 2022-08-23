@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jhun_csqt.mapper.KtrussMapper">
+    <!-- 查询通过ktruss算法输出的社区搜索结果列表 -->
+    <select id="listKtrussResult" resultType="com.example.jhun_csqt.entity.Ktruss.Ktrussresult">
+        select * from `ktrussresult`
+        <where>
+            <if test="fileName != null and fileName.length > 0">
+                and `fileName` = #{fileName}
+            </if>
+            <if test="nodeId != null and nodeId.length > 0">
+                and `nodeId` = #{nodeId}
+            </if>
+            <if test="ktrussValue != null and ktrussValue.length > 0">
+                and `ktrussValue` = #{ktrussValue}
+            </if>
+        </where>
+    </select>
+
+    <!--插入用户的输入数据和输出的社区的数据-->
+    <insert id="InsertData" parameterType="com.example.jhun_csqt.entity.Ktruss.Ktrussresult">
+        insert into `ktrussresult` (nodeId,ktrussValue,numberOfEdges,outlinks, fileName, otherData) values(#{nodeId},#{ktrussValue},#{numberOfEdges},#{outlinks},#{fileName}, #{otherData})
+    </insert>
+
+    <!--修改ktruss算法输出的测试结果-->
+    <update id="UpdateKtrussResult">
+        update `ktrussresult`
+        <set>
+            <if test="numberOfEdges != null and numberOfEdges.length > 0">
+                `numberOfEdges` = #{numberOfEdges},
+            </if>
+            <if test="outlinks != null and outlinks.length > 0">
+                `outlinks` = #{outlinks},
+            </if>
+            <if test="otherData != null and otherData.length > 0">
+                `otherData` = #{otherData},
+            </if>
+        </set>
+        where `fileName` = #{fileName} and `nodeId` = #{nodeId} and `ktrussValue` = #{ktrussValue}
+    </update>
+</mapper>

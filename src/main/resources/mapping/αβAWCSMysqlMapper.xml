@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jhun_csqt.mapper.αβAWCSMapper">
+    <!-- 查询通过ktruss算法输出的社区搜索结果列表 -->
+    <select id="listαβAWCSResult" resultType="com.example.jhun_csqt.entity.αβAWCS.αβAWCSResult">
+        select * from `αβawcsresult`
+        <where>
+            <if test="fileName != null and fileName.length > 0">
+                and `fileName` = #{fileName}
+            </if>
+            <if test="nodeId != null and nodeId.length > 0">
+                and `nodeId` = #{nodeId}
+            </if>
+            <if test="upperDegree != null and upperDegree.length > 0">
+                and `upperDegree` = #{upperDegree}
+            </if>
+            <if test="lowerDegree != null and lowerDegree.length > 0">
+                and `lowerDegree` = #{lowerDegree}
+            </if>
+            <if test="constraintWay != null and constraintWay.length > 0">
+                and `constraintWay` = #{constraintWay}
+            </if>
+            <if test="keywords != null and keywords.length > 0">
+                and `keywords` = #{keywords}
+            </if>
+        </where>
+    </select>
+
+    <!--插入用户的输入数据和输出的社区的数据-->
+    <insert id="InsertData" parameterType="com.example.jhun_csqt.entity.αβAWCS.αβAWCSResult">
+        insert into `αβawcsresult` (fileName, nodeId, upperDegree, lowerDegree, constraintWay, keywords, primaryData, timeData)
+        values(#{fileName}, #{nodeId}, #{upperDegree}, #{lowerDegree}, #{constraintWay}, #{keywords}, #{primaryData}, #{timeData})
+    </insert>
+
+    <!--修改ktruss算法输出的测试结果-->
+    <update id="UpdateαβAWCSResult">
+        update `αβawcsresult`
+        <set>
+            <if test="primaryData != null and primaryData.length > 0">
+                `primaryData` = #{primaryData},
+            </if>
+            <if test="timeData != null and timeData.length > 0">
+                `timeData` = #{timeData},
+            </if>
+        </set>
+        where `fileName` = #{fileName} and `nodeId` = #{nodeId} and `upperDegree` = #{upperDegree} and `lowerDegree` = #{lowerDegree}
+            and `constraintWay` = #{constraintWay} and `keywords` = #{keywords}
+    </update>
+</mapper>

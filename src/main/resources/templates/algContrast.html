@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="shortcut icon" href="/static/img/icons/facicon.png" />
+    <title>江汉大学社区搜索系统</title>
+    <!--网站模板（app.css） css-->
+    <link href="/static/css/app.css" rel="stylesheet">
+    <!--bootstrap.css（5.1.3）-->
+    <link href="/static/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+    <!--美化后的alert样式-->
+    <link href="/static/css/sweetalert.css" rel="stylesheet">
+    <!--bootstrap滑块（slider）-->
+    <link href="/static/css/bootstrap-slider.css" rel="stylesheet">
+    <!--bootstrap图标库-->
+    <link href="/static/css/bootstrap-icons.css" rel="stylesheet">
+    <!--复选框和单选按钮样式-->
+    <link href="/static/css/checkbox_radio-css/checked.min.css" rel="stylesheet">
+</head>
+
+<style>
+    /*------ original_style ------*/
+    .content {
+        padding: 1.5rem 1.5rem .75rem;
+        flex: 1;
+        max-width: 100vw;
+        direction: ltr;
+    }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: initial;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 24px;
+        box-shadow: none;!important;
+    }
+    .card-header {
+        background-color: #fff;!important;
+    }
+    .main2 {
+        display: flex;
+        position: relative;
+        /*justify-content: center;*/
+    }
+    /*------ original_style ------*/
+    .a1 {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+    .a1:hover {
+        color: blue;
+    }
+    .right1 {
+        position: absolute;
+        right: 0px;
+        width: 180px;
+    }
+    h9 {
+        text-shadow: 2px 2px 2px	#A0A0A0;
+        font-size:21px;
+    }
+
+    #R1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 1000px;
+        width: 100%;
+    }
+    #echarts_graph{
+        width: 97%;
+        height: 1000px;
+    }
+    /*----------- 滑块样式 -----------*/
+    #exSlider .slider-selection {
+        background: #409eff;
+    }
+    /*----------- 滑块样式 -----------*/
+
+    /*------ 单选按钮的样式 ------*/
+    .label1 {
+        margin-left: -1px;
+        font-weight: normal;
+    }
+    .a-radio{
+        display: none;
+    }
+    .b-radio{
+        display: inline-block;
+        border:1px solid dimgrey;
+        width:16px;
+        height: 16px;
+        border-radius:2px;
+        vertical-align: middle;
+        margin-right: 5px;
+        position: relative;
+    }
+    .b-radio:before{
+        content: '';
+        font-size: 0;
+        width: 10px;
+        height: 10px;
+        background: dodgerblue;
+        position: absolute;
+        left:50%;
+        top:50%;
+        margin-left: -5px;
+        margin-top: -5px;
+        border-radius: 2px;
+        display: none;
+    }
+    .a-radio:checked~.b-radio:before{
+        display: block;
+    }
+    /*------ 单选按钮的样式 ------*/
+
+    /*--------- 表格中复选框和关键词位置的设置 ---------*/
+    .checkBoxes tr {
+        border: none !important;
+    }
+    .checkBoxes tr td {
+        height: 28px;
+    }
+    .checkBoxes tr td div {
+        float: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .checkBoxes tr td div input {
+        margin-top: 0px;
+        margin-right: 2px
+    }
+    /*--------- 表格中复选框和关键词位置的设置 ---------*/
+
+    /*------ refresh_icon_animation ------*/
+    @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    /*------ refresh_icon_animation ------*/
+
+    /*----------- 页面加载样式 -----------*/
+    /*指示器*/
+    .loading-indicator {
+        height: 66px;
+        width: 66px;
+        background: url('/static/img/gif/loading/Iphone-spinner-2.gif') no-repeat center center;
+    }
+    /*遮盖层*/
+    .loading-indicator-overlay {
+        background-color: #FFFFFF;
+        opacity: 0.6;
+        filter: alpha(opacity = 60);
+    }
+    /*----------- 页面加载样式 -----------*/
+
+    .removeBtnDefStyle:focus,
+    .removeBtnDefStyle:active:focus,
+    .removeBtnDefStyle.active:focus,
+    .removeBtnDefStyle.focus,
+    .removeBtnDefStyle:active.focus,
+    .removeBtnDefStyle.active.focus {
+        border-color: #ced4da;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .tickBtnStyle:focus,
+    .tickBtnStyle:active:focus,
+    .tickBtnStyle.active:focus,
+    .tickBtnStyle.focus,
+    .tickBtnStyle:active.focus,
+    .tickBtnStyle.active.focus {
+        border-color: rgb(13, 110, 253);
+        outline: none;
+        box-shadow: none;
+    }
+
+    .removeBtn1Style:focus,
+    .removeBtn1Style:active:focus,
+    .removeBtn1Style.active:focus,
+    .removeBtn1Style.focus,
+    .removeBtn1Style:active.focus,
+    .removeBtn1Style.active.focus {
+        border-color: #ced4da;
+        background-color: #FFFFFF;
+        outline: none;
+        box-shadow: none;
+    }
+    /* div块的半透明样式 */
+    .halfTransparent {
+        background-color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    #state {
+        display: flex;
+    }
+    .w-61 {
+        width: 61% !important;
+    }
+    .w-27 {
+        width: 27% !important;
+    }
+    .w-22 {
+        width: 22% !important;
+    }
+    .w-46 {
+        width: 45% !important;
+    }
+    .w-33 {
+        width: 33% !important;
+    }
+
+    .removeBtn2Style:focus,
+    .removeBtn2Style:active:focus,
+    .removeBtn2Style.active:focus,
+    .removeBtn2Style.focus,
+    .removeBtn2Style:active.focus,
+    .removeBtn2Style.active.focus {
+        outline: none;
+        box-shadow: none;
+    }
+    #loginState:hover {
+        background-color: #FFFFFF;
+        color: #6c757d;
+        border-color: rgb(13, 110, 253);
+    }
+
+    .time1 {
+        width: 152.51px;
+        height: 18px;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+        font-size: 14px;
+    }
+
+    .FlexCenter1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #originalGraph{
+        width: 97%;
+        height: 380px; /* 420px */
+    }
+
+    /*------------------- r-slider.js 的样式 -------------------*/
+    /*.container1 {
+        width: 100%;
+        height: 30px !important;
+    }
+
+    .switch {
+        width: 40px;
+        height: 10px;
+        position: absolute;
+        left: calc(50% - 20px);
+        top: calc(50% - 5px);
+        border: 1px solid #aaa;
+        border-radius: 20px;
+    }
+
+    .r-slider-button {
+        background: #2196f3;
+        border-radius: 100%;
+        text-align: center;
+    }
+
+    .r-slider-line {
+        background: #ccc;
+    }
+
+    .r-slider-fill {
+        background: #2196f3;
+    }
+
+    .r-slider-number {
+        position: absolute;
+        background: #000;
+        color: #fff;
+        width: 28px;
+        left: calc(50% - 14px);
+        top: -16px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+
+    .r-slider-text {
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .r-slider-pin {
+        background: #ccc;
+    }
+
+    .r-slider-label {
+        font-size: 10px;
+        top: 16px;
+    }*/
+    /*------------------- r-slider.js 的样式 -------------------*/
+</style>
+
+<body>
+<div class="wrapper">
+
+    <nav id="sidebar" class="sidebar active">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="/getpage?value=index">
+                <span class="align-middle">
+                    <h9><strong>江汉大学社区搜索系统</strong></h9>
+                </span>
+            </a>
+            <h4>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a id="a1" data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+                            <svg t="1626417373145" class="icon" viewBox="0 0 1254 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="15230" width="25" height="25">
+                                <path d="M790.323624 478.979879a267.971104 267.971104 0 1 0-330.311846 0 444.103736 444.103736 0 0 0-281.561316 411.887965v88.754538a44.516656 44.516656 0 0 0 44.69089 44.37727h803.808771a44.516656 44.516656 0 0 0 44.69089-44.37727v-88.754538a443.493919 443.493919 0 0 0-281.317389-411.887965z m-358.920984-209.690002A193.921872 193.921872 0 1 1 625.307088 461.748187 193.294631 193.294631 0 0 1 431.40264 269.3073z m573.228173 681.723367H245.774282v-47.182429a379.463112 379.463112 0 0 1 758.908802 0z"
+                                      p-id="15231" fill="#ffffff"></path>
+                                <path d="M279.227112 520.081559l8.711674-2.038532a43.140212 43.140212 0 0 0 1.881722-82.813176 133.149231 133.149231 0 0 1-78.753537-121.092274c0-59.239386 51.398879-108.913353 105.14991-126.249585a260.3571 260.3571 0 0 1 41.816037-79.223967c3.118779-5.227005 6.568602-10.314622 10.001002-15.315124-3.58921-0.15681-6.96934-1.097671-10.785053-1.097671A222.827207 222.827207 0 0 0 133.968653 314.120153a220.475055 220.475055 0 0 0 58.124291 148.760552A353.031892 353.031892 0 0 0 0.000525 777.73804v68.752534a44.516656 44.516656 0 0 0 44.690889 44.37727h80.008018a343.414204 343.414204 0 0 1 9.060141-78.596726H77.185959v-34.376268a265.200791 265.200791 0 0 1 202.041153-257.813291z m778.823689-57.183431a220.492478 220.492478 0 0 0 58.124291-148.760551A222.827207 222.827207 0 0 0 892.825185 92.268654c-3.74602 0-7.195843 0.940861-10.785053 1.097671 3.48467 5.000501 6.882223 10.157812 10.001002 15.315123a263.42361 263.42361 0 0 1 41.711497 79.223967c53.751031 17.423349 112.659373 67.027623 112.659373 126.249585a133.253771 133.253771 0 0 1-78.596726 121.092274 44.446963 44.446963 0 0 0-30.316627 40.944869 44.95224 44.95224 0 0 0 32.024115 41.711497l8.711674 2.038532a265.200791 265.200791 0 0 1 202.110846 257.865562v34.376267h-64.065654a342.386226 342.386226 0 0 1 9.060142 78.596726h80.008017a44.516656 44.516656 0 0 0 44.69089-44.377269V777.807734a353.188703 353.188703 0 0 0-192.057574-314.909606z"
+                                      p-id="15232" fill="#ffffff"></path>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>团队介绍</strong></span>
+                        </a>
+                        <ul id="ui" class="sidebar-dropdown list-unstyled" style="font-size: 17px;">
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=index">团队成员介绍</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=achievements">团队已有成果</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=view">团队风采</a></li>
+                            <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=connect">联系我们</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a id="a2" data-target="#forms" data-toggle="collapse" class="sidebar-link">
+                            <svg t="1626417545730" class="icon" viewBox="0 0 1116 1024" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg" p-id="16451" width="24" height="24">
+                                <path d="M1012.706166 803.352193H685.538866l115.97427 165.446106a33.857203 33.857203 0 0 1-52.564763 42.675996l-150.646454-208.005105H518.627794l-150.646454 208.005105a33.949201 33.949201 0 0 1-26.270382 12.425707 33.764205 33.764205 0 0 1-26.294381-55.101703L431.389847 803.352193H104.223547A103.851556 103.851556 0 0 1 0.325992 699.757631V265.876843a103.851556 103.851556 0 0 1 103.897555-103.572563h908.482619a103.827556 103.827556 0 0 1 103.897555 103.455565V699.757631a103.851556 103.851556 0 0 1-103.897555 103.594562z m36.300145-537.522349a36.184148 36.184148 0 0 0-36.160148-36.067152H104.223547a36.184148 36.184148 0 0 0-36.160149 36.067152v433.880788a36.184148 36.184148 0 0 0 36.160149 36.044152h908.482619a36.184148 36.184148 0 0 0 36.161149-36.044152h0.139996v-433.949787zM675.929092 602.700915a34.252194 34.252194 0 0 1-24.945413 15.241642 28.412331 28.412331 0 0 1-3.513917 0.139996 34.019199 34.019199 0 0 1-23.967436-9.843768L451.030385 436.603824l-95.404755 134.217842a33.880203 33.880203 0 0 1-55.288698-39.162079l118.674207-166.911071a33.9962 33.9962 0 0 1 51.634784-4.444896l171.23997 170.680983 118.790204-183.362684a33.9732 33.9732 0 0 1 46.887897-10.005765 33.55421 33.55421 0 0 1 10.005764 46.538905z m69.621361-535.195404h-374.31119a33.764205 33.764205 0 1 1 0-67.481412h374.31119a33.764205 33.764205 0 1 1 0 67.481412z"
+                                      p-id="16452" fill="#ffffff"></path>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>社区搜索算法展示</strong></span>
+                        </a>
+                        <ul id="forms" class="sidebar-dropdown list-unstyled">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=overview">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
+                                         class="bi bi-info-circle" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>概述</strong>
+									</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="a3" data-target="#infoNet" data-toggle="collapse" class="sidebar-link collapsed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff"
+                                         class="bi bi-globe2" viewBox="0 0 16 16" style="margin-left: -7px">
+                                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>同质信息网络</strong>
+									</span>
+                                </a>
+                                <ul id="infoNet" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-core">k-core</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-truss">k-truss</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=k-clique">k-clique</a></li>
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=K-ECC">K-ECC</a></li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                <a id="a4" data-target="#bigraph" data-toggle="collapse" class="sidebar-link collapsed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#ffffff"
+                                         class="bi bi-diagram-3" viewBox="0 0 16 16" style="margin-left: -9px">
+                                        <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>二部图</strong>
+									</span>
+                                </a>
+                                <ul id="bigraph" class="sidebar-dropdown list-unstyled">
+                                    <ul style="list-style: none;font-size: 16px;">
+                                        <li class="sidebar-item"><a class="sidebar-link" href="/getpage?value=αβAWCS">(α，β)-AWCS</a></li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li class="sidebar-item active">
+                                <a class="sidebar-link" href="/getpage?value=algContrast">
+                                    <!--算法分析的图标-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="white"
+                                         class="bi bi-arrows-collapse" viewBox="0 0 16 16" style="margin-left: -10px">
+                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"/>
+                                    </svg>
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>算法对比</strong>
+									</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item"> <!--active-->
+                        <a id="a5" data-target="#voice" data-toggle="collapse" class="sidebar-link collapsed">
+                            <!--图标（svg，大小：24×24）-->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-disc" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 5-5 .5.5 0 0 1 0 1zm4.5 3.5a.5.5 0 0 1 .5.5 5 5 0 0 1-5 5 .5.5 0 0 1 0-1 4 4 0 0 0 4-4 .5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            <span class="align-middle" style="font-size: 18px;margin-left: -6px;"><strong>语音增强算法展示</strong></span>
+                        </a>
+                        <ul id="voice" class="sidebar-dropdown list-unstyled">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="/getpage?value=adasastargan">
+                                    <!--图标-->
+                                    <span style="margin-left: -8px;font-size: 17px;">
+										<strong>AdaSAStarGAN</strong>
+									</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </h4>
+        </div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle d-flex">
+                <i class="hamburger align-self-center"></i>
+            </a>
+            <img src="/static/img/icons/图2.jpg" class="media-object" width="167px" height="50px">
+
+            <!--显示用户的登录状态-->
+            <div class="w-61" id="state">
+                <div class="dropdown" style="margin-left: auto;">
+                    <button class="btn btn-outline-secondary removeBtn2Style" type="button" id="loginState">
+                        登录
+                    </button>
+                    <ul class="dropdown-menu" id="user_menu" aria-labelledby="loginState">
+                        <li><a class="dropdown-item" id="quitLogin">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--显示用户的登录状态-->
+
+            <div class="right1">
+                <div class="center">
+                    <img src="/static/img/icons/10.png" width="150px" height="54px">
+                </div>
+                <i class="icons icotime"></i>
+                <!--当前时间-->
+                <span class="time1" id="time1"></span>
+            </div>
+        </nav>
+
+        <main class="content">
+            <main class="content">
+                <div class="container-fluid p-0">
+                    <div class="FlexCenter1">
+                        <div class="card w-27 mr-4" style="float: left">
+                            <div class="card-body" style="height: 500px">
+                                <div class="mb-3">
+                                    <label class="form-label" style="font-size: 23px"><strong>算法一：</strong></label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="AlgList1" class="form-label"><strong>选择算法：</strong></label>
+                                    <div class="input-group">
+                                        <select class="form-select removeBtnDefStyle" id="AlgList1"
+                                                style="cursor: pointer; width: 213.8px; height: 38px;">
+                                            <option value="(α,β)-AWCS">(α,β)-AWCS</option>
+                                            <option value="SC(significant(α,β)-community)">SC(significant(α,β)-community)</option>
+                                            <option value="alg3">alg 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button removeBtn1Style collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="background-color: rgba(255, 255, 255, 0.5) !important;">
+                                                数据输入模块（动态变化）
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                             data-bs-parent="#accordionExample">
+                                            <div class="accordion-body" style="padding: 0 !important;">
+                                                <div class="card" style="margin-bottom: 0 !important; background-color: lightgoldenrodyellow; border: solid thin #0c63e4; z-index: 1;">
+                                                    <div class="card-body" style="padding: 5px; ">
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>顶点id：</strong></label>
+                                                            <input type="text" id="nodeId" name="nodeId" value="" class="form-control" placeholder="id">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>上层顶点的度：</strong></label>
+                                                            <input type="text" id="upperDegree" name="upperDegree" value="" class="form-control"
+                                                                   placeholder="upperDegree">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>下层顶点的度：</strong></label>
+                                                            <input type="text" id="lowerDegree" name="lowerDegree" value="" class="form-control"
+                                                                   placeholder="lowerDegree">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>算法约束：</strong></label>
+                                                            <label class="label1">
+                                                                <input class="a-radio" id="strictC" type="radio" name="algoConstraint" value="loose" checked>
+                                                                <span class="b-radio"></span>松弛约束
+                                                            </label>
+                                                            <label class="label1">
+                                                                <input class="a-radio" id="looseC" type="radio" name="algoConstraint" value="strong">
+                                                                <span class="b-radio"></span>严格约束
+                                                            </label>
+                                                        </div>
+                                                        <div class="btn-group dropend form-control mb-3" style="height: 38px;display: flex; align-items: center; justify-content: center;">
+                                                            <button type="button" class="btn btn-ghost" aria-expanded="false"
+                                                                    style="width: 80.7%; height: 38px;">
+                                                                <strong>电影关键词</strong>
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-ghost dropdown-toggle-split"
+                                                                    data-toggle="dropdown" aria-expanded="false"
+                                                                    style="width: 19.3%; height: 38px;">
+                                                                <span  style="display: inline-block; margin-top: -12px;">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                         fill="#000000" class="bi bi-caret-up-fill" viewBox="0 0 16 16"
+                                                                         style="margin-top: 10px;">
+                                                                        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                                    </svg><br>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                         fill="#000000" class="bi bi-caret-down-fill" viewBox="0 0 16 16"
+                                                                         style="margin-top: -16px;">
+                                                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <table id="checkboxT" class="table checkBoxes"></table>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" style="margin-right: 6px"><strong>绘图周期</strong></label>
+                                                            <input id="ex1" type="text" data-slider-id="exSlider"
+                                                                   data-slider-min="1" data-slider-max="30"
+                                                                   data-slider-step="1" data-slider-value="10"/>
+                                                            <span id="ex1CurrentSliderValLabel" style="margin-left: 6px"><span id="ex1SliderVal">1</span>s</span>
+                                                        </div>
+                                                        <div>
+                                                            <button id="search_btn1" class="btn btn-primary" style="float: right; ">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card w-46 mr-4" style="float: left">
+                            <div class="card-body" id="originalGraphContainer" style="position: relative; height: 500px; ">
+                                <!-- 关系图容器 -->
+                                <div id="originalGraph" style="width: 100% !important; "></div><br>
+                                <!-- 控制绘图周期的滑动条 -->
+<!--                                <div id="originSlider" class="container1"></div>-->
+                                <!-- 功能按钮模块 -->
+                                <div class="w-100" style="display: flex; justify-content: center;">
+                                    <div class="w-100 FlexCenter1" style="position: absolute; bottom: 8px">
+                                        <div class="input-group w-75"> <!--style="float: left; "-->
+                                            <button title="上传数据集文件" id="uploadDataSet" type="button" class="btn btn-outline-primary tickBtnStyle">
+                                            <span style="cursor: pointer;">
+                                                <svg id="upload" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" class="bi bi-upload" viewBox="0 0 16 16">
+                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                                                </svg>
+                                            </span>
+                                                <label style="color: black; cursor: pointer; ">上传</label>
+                                            </button>
+                                            <select class="form-select removeBtnDefStyle" id="fileList"
+                                                    style="cursor: pointer; width: 213.8px; height: 38px;">
+                                            </select>
+                                            <button title="加载数据集文件" id="tick1" type="button" class="btn btn-outline-primary tickBtnStyle">
+                                            <span style="cursor: pointer;">
+                                                <svg id="refresh" fill="#000000" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="20px" height="20px">
+                                                    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+                                                          d="M6.294 21.706C8.306 24.313 11.452 26 15 26c5.589 0 10.193-4.171 10.896-9.568M23.706 8.294C21.694 5.687 18.548 4 15 4 9.411 4 4.807 8.171 4.104 13.568"/>
+                                                    <path d="M26 11L20 10 25 5zM3 19L9 20 4 25z"/>
+                                                </svg>
+                                            </span>
+                                            </button>
+                                        </div>
+                                        <div class="w-22 FlexCenter1"> <!--style="float: left; "-->
+                                            <button title="绘制图形" id="drawOriginDataSet" type="button" class="btn btn-outline-primary tickBtnStyle" style="margin-left: auto; ">
+                                            <span style="cursor: pointer;">
+                                                <svg id="paint" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" class="bi bi-brush" viewBox="0 0 16 16">
+                                                    <path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.118 8.118 0 0 1-3.078.132 3.659 3.659 0 0 1-.562-.135 1.382 1.382 0 0 1-.466-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04zM4.705 11.912a1.23 1.23 0 0 0-.419-.1c-.246-.013-.573.05-.879.479-.197.275-.355.532-.5.777l-.105.177c-.106.181-.213.362-.32.528a3.39 3.39 0 0 1-.76.861c.69.112 1.736.111 2.657-.12.559-.139.843-.569.993-1.06a3.122 3.122 0 0 0 .126-.75l-.793-.792zm1.44.026c.12-.04.277-.1.458-.183a5.068 5.068 0 0 0 1.535-1.1c1.9-1.996 4.412-5.57 6.052-8.631-2.59 1.927-5.566 4.66-7.302 6.792-.442.543-.795 1.243-1.042 1.826-.121.288-.214.54-.275.72v.001l.575.575zm-4.973 3.04.007-.005a.031.031 0 0 1-.007.004zm3.582-3.043.002.001h-.002z"/>
+                                                </svg>
+                                            </span>
+                                                <label style="color: black; cursor: pointer; ">绘制</label>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card w-27" style="float: left">
+                            <div class="card-body" style="height: 500px">
+                                <div class="mb-3">
+                                    <label class="form-label" style="font-size: 23px"><strong>算法二：</strong></label>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="AlgList2" class="form-label"><strong>选择算法：</strong></label>
+                                    <div class="input-group">
+                                        <select class="form-select removeBtnDefStyle" id="AlgList2"
+                                                style="cursor: pointer; width: 213.8px; height: 38px;">
+                                            <option value="SC(significant(α,β)-community)">SC(significant(α,β)-community)</option>
+                                            <option value="(α,β)-AWCS">(α,β)-AWCS</option>
+                                            <option value="alg3">alg 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="accordion" id="accordionExample2">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne2">
+                                            <button class="accordion-button removeBtn1Style collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne" style="background-color: rgba(255, 255, 255, 0.5) !important;">
+                                                数据输入模块（动态变化）
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne2" class="accordion-collapse collapse" aria-labelledby="headingOne2"
+                                             data-bs-parent="#accordionExample2">
+                                            <div class="accordion-body" style="padding: 0 !important;">
+                                                <div class="card" style="margin-bottom: 0 !important; background-color: lightgoldenrodyellow; border: solid thin #0c63e4; z-index: 1;">
+                                                    <div class="card-body" style="padding: 5px; ">
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>顶点id：</strong></label>
+                                                            <input type="text" id="nodeId2" name="nodeId" value="" class="form-control" placeholder="id">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>上层顶点的度：</strong></label>
+                                                            <input type="text" id="upperDegree2" name="upperDegree" value="" class="form-control"
+                                                                   placeholder="upperDegree">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label"><strong>下层顶点的度：</strong></label>
+                                                            <input type="text" id="lowerDegree2" name="lowerDegree" value="" class="form-control"
+                                                                   placeholder="lowerDegree">
+                                                        </div>
+
+                                                        <div class="btn-group dropend form-control mb-3" style="height: 38px;display: flex; align-items: center; justify-content: center;">
+                                                            <button type="button" class="btn btn-ghost" aria-expanded="false"
+                                                                    style="width: 80.7%; height: 38px;">
+                                                                <strong>电影关键词（可选）</strong>
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-ghost dropdown-toggle-split"
+                                                                    data-toggle="dropdown" aria-expanded="false"
+                                                                    style="width: 19.3%; height: 38px;">
+                                                                <span  style="display: inline-block; margin-top: -12px;">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                         fill="#000000" class="bi bi-caret-up-fill" viewBox="0 0 16 16"
+                                                                         style="margin-top: 10px;">
+                                                                        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                                    </svg><br>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                         fill="#000000" class="bi bi-caret-down-fill" viewBox="0 0 16 16"
+                                                                         style="margin-top: -16px;">
+                                                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <table id="checkboxT2" class="table checkBoxes"></table>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label" style="margin-right: 6px"><strong>绘图周期</strong></label>
+                                                            <input id="ex2" type="text" data-slider-id="exSlider"
+                                                                   data-slider-min="1" data-slider-max="30"
+                                                                   data-slider-step="1" data-slider-value="10"/>
+                                                            <span id="ex2CurrentSliderValLabel" style="margin-left: 6px"><span id="ex2SliderVal">1</span>s</span>
+                                                        </div>
+                                                        <div>
+                                                            <button id="search_btn2" class="btn btn-primary" style="float: right; ">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="FlexCenter1">
+                        <div class="card w-50 mr-4" style="float: left">
+                            <div id="leftGraph" class="card-body" style="height: 500px">
+
+                            </div>
+                        </div>
+                        <div class="card w-50" style="float: left">
+                            <div id="rightGraph" class="card-body" style="height: 500px">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---------------------------- 柱状统计图和扇形统计图 ---------------------------->
+                    <div class="FlexCenter1">
+                        <div class="card w-33 mr-4" style="float: left">
+                            <div id="columnar1" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+
+                        <!------------------ 算法一的扇形统计图 ------------------>
+                        <div class="card w-33 mr-4" style="float: left">
+                            <div id="sector1" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+                        <!------------------ 算法一的扇形统计图 ------------------>
+                        <!------------------ 算法二的扇形统计图 ------------------>
+                        <div class="card w-33" style="float: left">
+                            <div id="sector2" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+                        <!------------------ 算法二的扇形统计图 ------------------>
+                    </div>
+
+                    <div class="FlexCenter1">
+                        <div class="card w-33 mr-4" style="float: left">
+                            <div id="columnar2" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+                        <div class="card w-33 mr-4" style="float: left">
+                            <div id="columnar3" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+                        <div class="card w-33" style="float: left">
+                            <div id="columnar4" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+                    </div>
+
+                    <div> <!-- class="FlexCenter1" -->
+                        <div class="card w-33" style="float: left;">
+                            <div id="columnar5" class="card-body FlexCenter1" style="height: 366px"></div>
+                        </div>
+                    </div>
+                    <!---------------------------- 柱状统计图和扇形统计图 ---------------------------->
+                </div>
+            </main>
+        </main>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div style="text-align:center;">
+                        <p class="mb-0" style="font-family:Times New Roman,Georgia,宋体; color: black; ">
+                            <strong>
+                                Copyright © 江汉大学李登实科研团队 &nbsp; &nbsp; &nbsp; 地址：武汉经济技术开发区三角湖路8号 &nbsp; &nbsp; &nbsp;
+                                邮政编码：430056 &nbsp; &nbsp; &nbsp; 电话：027-84226927-8501 &nbsp; &nbsp; &nbsp;
+                                鄂ICP备05003321号-1
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+<!--jQuery-->
+<script src="/static/js/jquery-3.6.0.js"></script>
+<!--jQuery-show-loading-->
+<script src="/static/js/jquery.showLoading.js"></script>
+<!--echarts.js-->
+<script src="/static/js/echarts.js"></script>
+<!--app.js-->
+<script src="/static/js/app.js"></script>
+<!--美化后的alert的js-->
+<script src="/static/js/sweetalert-dev.js"></script>
+<!--bootstrap.js-->
+<script src="/static/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+<!--bootstrap-slider.js-->
+<script src="/static/js/bootstrap-slider.js"></script>
+<!--jQuery.cookie-->
+<script src="/static/js/jquery.cookie.js"></script>
+<!--crypto.js-->
+<script src="/static/js/crypto-js.min.js"></script>
+
+<!--r-slider.js-->
+<!--<script src="/static/js/r-slider.js"></script>-->
+
+<!-- 自定义的js -->
+<!-- 算法对比界面的js -->
+<script src="/static/js/algContrast/main.js"></script>
+<!-- 前端框架中的脚本 -->
+<script src="/static/js/frontFrameScript.js"></script>
+</body>
+
+</html>
